@@ -14,8 +14,11 @@ class ViewController: UIViewController {
 	// create and declare our tableview and dateLabel objects
 	private let tableView = UITableView(frame: .zero, style: .grouped)
 	private let dateLabel = UILabel()
+	
+	
     // add UI button
-	private let taskButton = UIButton(type: UIButtonType.system) as UIButton
+	private let taskButton = UIButton(type: .system)
+	
 	
 	// create our static data
 	// this will change into a 'var' once we have task adding/removing set up,
@@ -52,7 +55,8 @@ class ViewController: UIViewController {
 		// because we will place the date in the header of the tableview,
 		// so that it can scroll along with the table
 		layoutDateLabel()
-        
+		
+		
         // layout for task button
         layoutTaskButton()
         
@@ -153,13 +157,25 @@ class ViewController: UIViewController {
     func layoutTaskButton() {
         
         // container for task button
-        let taskButContainerView = UIView(frame: CGRect(x: self.view.center.x, y: 0, width: 100, height: 100))
+		// when using a container that goes into the header or footer of a tableview
+		// set the x and y to 0 and the width can be any number > 0, because the
+		// tableview will resize it to match the width of itself.
+		// the only thing we have to customize here would be the height, as
+		// the tableview will not resize that for us.
+        let taskButContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 100))
+		
         
-        // format and constraints for taskbutton
+		// when using constraints, always remember to disable this option
+		// this essential tells the program that we are going
+		// to set our constraints manually
+		taskButton.translatesAutoresizingMaskIntoConstraints = false
+		
+		
+		// format and constraints for taskbutton
         taskButton.setTitle("+", for: UIControlState.normal)
         taskButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
         taskButton.tintColor = .black
-        taskButton.backgroundRect(forBounds: CGRect(x: self.view.center.x, y:  self.view.center.y,width: 60, height: 50))
+        taskButton.backgroundRect(forBounds: CGRect(x: self.view.center.x, y:  self.view.center.y, width: 60, height: 50))
         taskButton.backgroundColor = .white
         taskButton.layer.cornerRadius = 4
         taskButton.sizeToFit()
@@ -167,7 +183,8 @@ class ViewController: UIViewController {
         taskButContainerView.addSubview(taskButton)
         
         tableView.tableFooterView = taskButContainerView
-        
+		
+		
         // set container size to be below the container
         NSLayoutConstraint.activate([
             
