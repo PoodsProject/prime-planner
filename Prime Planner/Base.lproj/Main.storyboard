@@ -51,6 +51,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Prime_planner_3" width="300" height="300"/>
+        <image name="Prime_planner_3" width="150" height="150"/>
     </resources>
 </document>
