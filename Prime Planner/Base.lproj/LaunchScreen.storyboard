@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Prime_planner_3" translatesAutoresizingMaskIntoConstraints="NO" id="UND-yw-Hh7">
-                                <rect key="frame" x="82" y="215" width="240" height="237"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Prime_planner_splash-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Ga-qD-04X">
+                                <rect key="frame" x="0.0" y="0.0" width="426" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -33,6 +33,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Prime_planner_3" width="150" height="150"/>
+        <image name="Prime_planner_splash-1" width="225" height="400"/>
     </resources>
 </document>
