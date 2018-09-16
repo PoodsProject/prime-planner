@@ -13,6 +13,8 @@
 		16307F7521418D46008B2783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16307F7421418D46008B2783 /* Assets.xcassets */; };
 		16307F7821418D46008B2783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16307F7621418D46008B2783 /* LaunchScreen.storyboard */; };
 		16307F8321418D47008B2783 /* Prime_PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16307F8221418D47008B2783 /* Prime_PlannerTests.swift */; };
+		16AD69A5214F0BA2002BD255 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AD69A4214F0BA2002BD255 /* TaskCell.swift */; };
+		16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AD69A7214F120A002BD255 /* Checkbox.swift */; };
 		16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5ED4214B8A0B00A6B066 /* JCoreRequest.swift */; };
 		16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5ED5214B8A0B00A6B066 /* JManaged.swift */; };
 		16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5ED6214B8A0B00A6B066 /* JCoreArray.swift */; };
@@ -45,6 +47,8 @@
 		16307F7E21418D47008B2783 /* Prime PlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Prime PlannerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16307F8221418D47008B2783 /* Prime_PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime_PlannerTests.swift; sourceTree = "<group>"; };
 		16307F8421418D47008B2783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16AD69A4214F0BA2002BD255 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		16AD69A7214F120A002BD255 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		16BA5ED4214B8A0B00A6B066 /* JCoreRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCoreRequest.swift; sourceTree = "<group>"; };
 		16BA5ED5214B8A0B00A6B066 /* JManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JManaged.swift; sourceTree = "<group>"; };
 		16BA5ED6214B8A0B00A6B066 /* JCoreArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCoreArray.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				16BA5ED3214B8A0B00A6B066 /* Core */,
+				16AD69A9214F1F87002BD255 /* Task */,
 				16307F6D21418D45008B2783 /* AppDelegate.swift */,
 				16307F6F21418D45008B2783 /* ViewController.swift */,
 				16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */,
@@ -114,6 +119,15 @@
 				16307F8421418D47008B2783 /* Info.plist */,
 			);
 			path = "Prime PlannerTests";
+			sourceTree = "<group>";
+		};
+		16AD69A9214F1F87002BD255 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				16AD69A7214F120A002BD255 /* Checkbox.swift */,
+				16AD69A4214F0BA2002BD255 /* TaskCell.swift */,
+			);
+			path = Task;
 			sourceTree = "<group>";
 		};
 		16BA5ED3214B8A0B00A6B066 /* Core */ = {
@@ -252,11 +266,13 @@
 				16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */,
 				16BA5EE3214B8A0B00A6B066 /* JCore.swift in Sources */,
 				16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */,
+				16AD69A5214F0BA2002BD255 /* TaskCell.swift in Sources */,
 				16307F7021418D45008B2783 /* ViewController.swift in Sources */,
 				16BA5EE5214B8A0B00A6B066 /* JCore.xcdatamodeld in Sources */,
 				16BA5EE8214B8A1A00A6B066 /* TaskDetailViewController.swift in Sources */,
 				16BA5EE2214B8A0B00A6B066 /* Task.swift in Sources */,
 				16BA5EE6214B8A0B00A6B066 /* Date-Convenience.swift in Sources */,
+				16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */,
 				16BA5EE4214B8A0B00A6B066 /* JCoreRequest-Task.swift in Sources */,
 				16307F6E21418D45008B2783 /* AppDelegate.swift in Sources */,
 			);

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 	
 	
     // add UI button
-	private let taskButton = UIButton(type: .system)
+	private let taskAddButton = UIButton(type: .system)
 	
 	
 	// create our static data
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
 		
 		
         // layout for task button
-        layoutTaskButton()
+        layoutTaskAddButton()
         
 		
 	}
@@ -98,6 +98,10 @@ class ViewController: UIViewController {
 		// tableview will source its data from self (UIViewController) and notify self of any actions
 		tableView.dataSource = self
 		tableView.delegate = self
+		
+		
+		// register TaskCell with the tableView
+		tableView.register(TaskCell.self, forCellReuseIdentifier: "TaskCell")
 		
 		
 		// add the tableview to the main view of this view controller (self)
@@ -154,7 +158,7 @@ class ViewController: UIViewController {
 		
 	}
     
-    func layoutTaskButton() {
+    func layoutTaskAddButton() {
         
         // container for task button
 		// when using a container that goes into the header or footer of a tableview
@@ -168,19 +172,20 @@ class ViewController: UIViewController {
 		// when using constraints, always remember to disable this option
 		// this essential tells the program that we are going
 		// to set our constraints manually
-		taskButton.translatesAutoresizingMaskIntoConstraints = false
+		taskAddButton.translatesAutoresizingMaskIntoConstraints = false
 		
 		
 		// format and constraints for taskbutton
-        taskButton.setTitle("+", for: UIControlState.normal)
-        taskButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
-        taskButton.tintColor = .black
-        taskButton.backgroundRect(forBounds: CGRect(x: self.view.center.x, y:  self.view.center.y, width: 60, height: 50))
-        taskButton.backgroundColor = .white
-        taskButton.layer.cornerRadius = 4
-        taskButton.sizeToFit()
+        taskAddButton.setTitle("+", for: UIControlState.normal)
+        taskAddButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
+        taskAddButton.tintColor = .black
+        taskAddButton.backgroundRect(forBounds: CGRect(x: self.view.center.x, y:  self.view.center.y, width: 60, height: 50))
+        taskAddButton.backgroundColor = .white
+        taskAddButton.layer.cornerRadius = 4
+        taskAddButton.sizeToFit()
+		taskAddButton.addTarget(self, action: #selector(taskAddButtonPressed), for: .touchUpInside)
         
-        taskButContainerView.addSubview(taskButton)
+        taskButContainerView.addSubview(taskAddButton)
         
         tableView.tableFooterView = taskButContainerView
 		
@@ -188,13 +193,39 @@ class ViewController: UIViewController {
         // set container size to be below the container
         NSLayoutConstraint.activate([
             
-            taskButton.centerXAnchor.constraint(equalTo: taskButContainerView.centerXAnchor),
-            taskButton.centerYAnchor.constraint(equalTo: taskButContainerView.centerYAnchor),
+            taskAddButton.centerXAnchor.constraint(equalTo: taskButContainerView.centerXAnchor),
+            taskAddButton.centerYAnchor.constraint(equalTo: taskButContainerView.centerYAnchor),
             
             ])
         
         
     }
+	
+	@objc func taskAddButtonPressed() {
+		
+		
+		// create our detail controller
+		let taskDetailViewController = TaskDetailViewController()
+		taskDetailViewController.detailTextPassedFromPreviousController = "New Task"
+		
+		// add a done button for navigating back
+		// we target the taskDetailViewController itself, because that's
+		// where the action 'dismissModal' resides
+		taskDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+			barButtonSystemItem: .done,
+			target: taskDetailViewController,
+			action: #selector(TaskDetailViewController.dismissModal)
+		)
+		
+		// create new nav controller for a modal presentation
+		let navigation = UINavigationController(rootViewController: taskDetailViewController)
+
+		// push vc onto the nav stack
+		present(navigation, animated: true, completion: nil)
+		
+		
+	}
+	
 	
 }
 
@@ -223,26 +254,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		// we dequeue a cell view from the tableview
 		// tableviews reuse cells, to increase performance,
 		// especially for large numbers of rows
-		var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "TaskCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
 		
 		
-		// if the cell we dequeued does not exist, create it
-		// when the 'TaskCell' class is finished, this portion will not be necessary,
-		// as we can register the class with the tableview beforehand, preparing
-		// any reuseable cells that we need.
-		if cell == nil {
-			cell = UITableViewCell(style: .default, reuseIdentifier: "TaskCell")
-		}
-		
-		
-		// get the textLabel from the cell and set its text to the
-		// object from the data array at the specified index
-		// indexPath.row returns the current tableview row in which this cell will reside
-		cell.textLabel?.text = data[indexPath.row]
+		// set the cell's task to the data object from the
+		// data array at the specified index. indexPath.row returns the
+		// current tableview row in which this cell will reside
+		cell.setTask(task: data[indexPath.row])
 		
 		
 		// return our cell to the tableview datasource
 		return cell
+		
 		
 	}
 	

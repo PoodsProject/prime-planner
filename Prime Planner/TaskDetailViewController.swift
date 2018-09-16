@@ -67,4 +67,9 @@ class TaskDetailViewController: UIViewController {
 		
 	}
 	
+	// used to dismiss when presented as a modal
+	@objc func dismissModal() {
+		dismiss(animated: true, completion: nil)
+	}
+	
 }
