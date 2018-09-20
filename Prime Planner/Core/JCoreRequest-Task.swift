@@ -10,12 +10,14 @@ import Foundation
 
 extension JCore {
 	
-	
+	var tasks: JCoreRequest<Task> {
+		return jcore.data(Task.self)
+	}
 	
 }
 
 
-extension JCoreRequest {
+extension JCoreRequest where T: Task {
 	
 	
 	

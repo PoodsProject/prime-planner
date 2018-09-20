@@ -24,6 +24,7 @@
 		16BA5EE5214B8A0B00A6B066 /* JCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EDB214B8A0B00A6B066 /* JCore.xcdatamodeld */; };
 		16BA5EE6214B8A0B00A6B066 /* Date-Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EDE214B8A0B00A6B066 /* Date-Convenience.swift */; };
 		16BA5EE8214B8A1A00A6B066 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */; };
+		16C327662153181E00ED13C6 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C327652153181E00ED13C6 /* CoreDataTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		16BA5EDC214B8A0B00A6B066 /* JCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JCore.xcdatamodel; sourceTree = "<group>"; };
 		16BA5EDE214B8A0B00A6B066 /* Date-Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-Convenience.swift"; sourceTree = "<group>"; };
 		16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		16C327652153181E00ED13C6 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				16307F8221418D47008B2783 /* Prime_PlannerTests.swift */,
+				16C327652153181E00ED13C6 /* CoreDataTests.swift */,
 				16307F8421418D47008B2783 /* Info.plist */,
 			);
 			path = "Prime PlannerTests";
@@ -133,10 +136,10 @@
 		16BA5ED3214B8A0B00A6B066 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				16BA5ED7214B8A0B00A6B066 /* Objects */,
 				16BA5ED4214B8A0B00A6B066 /* JCoreRequest.swift */,
 				16BA5ED5214B8A0B00A6B066 /* JManaged.swift */,
 				16BA5ED6214B8A0B00A6B066 /* JCoreArray.swift */,
-				16BA5ED7214B8A0B00A6B066 /* Objects */,
 				16BA5ED9214B8A0B00A6B066 /* JCore.swift */,
 				16BA5EDA214B8A0B00A6B066 /* JCoreRequest-Task.swift */,
 				16BA5EDB214B8A0B00A6B066 /* JCore.xcdatamodeld */,
@@ -282,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C327662153181E00ED13C6 /* CoreDataTests.swift in Sources */,
 				16307F8321418D47008B2783 /* Prime_PlannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
