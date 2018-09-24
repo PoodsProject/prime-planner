@@ -25,6 +25,7 @@
 		16BA5EE6214B8A0B00A6B066 /* Date-Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EDE214B8A0B00A6B066 /* Date-Convenience.swift */; };
 		16BA5EE8214B8A1A00A6B066 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */; };
 		16C327662153181E00ED13C6 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C327652153181E00ED13C6 /* CoreDataTests.swift */; };
+		16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3276721531F2000ED13C6 /* TaskEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		16BA5EDE214B8A0B00A6B066 /* Date-Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-Convenience.swift"; sourceTree = "<group>"; };
 		16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		16C327652153181E00ED13C6 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		16C3276721531F2000ED13C6 /* TaskEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				16AD69A9214F1F87002BD255 /* Task */,
 				16307F6D21418D45008B2783 /* AppDelegate.swift */,
 				16307F6F21418D45008B2783 /* ViewController.swift */,
+				16C3276721531F2000ED13C6 /* TaskEditViewController.swift */,
 				16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */,
 				16307F7121418D45008B2783 /* Main.storyboard */,
 				16307F7421418D46008B2783 /* Assets.xcassets */,
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */,
+				16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */,
 				16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */,
 				16BA5EE3214B8A0B00A6B066 /* JCore.swift in Sources */,
 				16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */,
