@@ -61,8 +61,8 @@ class TaskCell: UITableViewCell {
 	
 	
 	// For now task is a String. This will change to take in a Task object
-    func setTask(task: String){
-        textLabel?.text = task
+    func setTask(task: Task){
+        textLabel?.text = task.name
     }
 	
     
