@@ -19,8 +19,9 @@ import UIKit
 class TaskEditViewController: UIViewController {
 	
 	let tableView = UITableView(frame: .zero, style: .grouped)
+	let nameTextField = UITextField()
+	
 	let taskFields = [
-		"Name",
 		"Date",
 		"Due",
 		"Priority",
@@ -32,7 +33,27 @@ class TaskEditViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		
+		layoutTextField()
 		layoutTableView()
+		
+		
+	}
+	
+	func layoutTextField() {
+		
+		nameTextField.translatesAutoresizingMaskIntoConstraints = false
+		nameTextField.placeholder = "Task Name"
+		view.addSubview(nameTextField)
+		
+		NSLayoutConstraint.activate([
+			
+			nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor),
+			nameTextField.heightAnchor.constraint(equalToConstant: 80),
+			nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			nameTextField.topAnchor.constraint(equalTo: view.topAnchor)
+			
+			])
 		
 	}
 	
@@ -53,7 +74,7 @@ class TaskEditViewController: UIViewController {
 			tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
 			tableView.heightAnchor.constraint(equalTo: view.heightAnchor),
 			tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+			tableView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor)
 			
 			])
 		
