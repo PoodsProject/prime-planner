@@ -33,17 +33,26 @@ class TaskEditViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		view.backgroundColor = .white
 		
 		layoutTextField()
 		layoutTableView()
 		
-		
+		navigationController?.setNavigationBarHidden(true, animated: true)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	
 	func layoutTextField() {
 		
 		nameTextField.translatesAutoresizingMaskIntoConstraints = false
 		nameTextField.placeholder = "Task Name"
+		nameTextField.text = task?.name
+		nameTextField.textAlignment = .center
+		nameTextField.font = UIFont.systemFont(ofSize: 24)
 		view.addSubview(nameTextField)
 		
 		NSLayoutConstraint.activate([
@@ -51,7 +60,7 @@ class TaskEditViewController: UIViewController {
 			nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor),
 			nameTextField.heightAnchor.constraint(equalToConstant: 80),
 			nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			nameTextField.topAnchor.constraint(equalTo: view.topAnchor)
+			nameTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: UIApplication.shared.statusBarFrame.height)
 			
 			])
 		
