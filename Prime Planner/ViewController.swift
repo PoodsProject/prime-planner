@@ -242,7 +242,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		// tableviews reuse cells, to increase performance,
 		// especially for large numbers of rows
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
-		
+		cell.checkbox.isHidden = false
+		cell.indentationLevel = 5
 		
 		// set the cell's task to the data object from the
 		// data array at the specified index. indexPath.row returns the
@@ -250,7 +251,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		if data.count != 0 {
 			cell.setTask(task: data[indexPath.row])
 		} else {
-			cell.textLabel?.text = "Create a New Task"
+			cell.textLabel?.text = "No Tasks"
+			cell.checkbox.isHidden = true
+			cell.indentationLevel = 0
 		}
 		
 		
@@ -265,10 +268,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 	// delegate function that is called when a user taps on a cell
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		guard data.count != 0 else { return }
 		
 		// let's deselect this row, so that it doesn't stay selected when we come back
 		tableView.deselectRow(at: indexPath, animated: true)
+		
+		
+		// guard function against empty data
+		guard data.count != 0 else { return }
 		
 		
 		// get the task from the data array, using the row that was tapped
