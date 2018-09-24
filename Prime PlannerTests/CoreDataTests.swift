@@ -19,7 +19,7 @@ class CoreDataTests: XCTestCase {
 		let task = Task(name: "Hello, World!")
 		task.creationDate = Date()
 		task.note = "This is a note."
-		task.isImportant = true
+		task.priority = 2
 		
 		
 		// check if the task exists with the specified name
