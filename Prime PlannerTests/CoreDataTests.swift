@@ -19,11 +19,20 @@ class CoreDataTests: XCTestCase {
 		let task = Task(name: "Hello, World!")
 		task.creationDate = Date()
 		task.note = "This is a note."
-		task.priority = 2
+		task.priority = .low
+		jcore.save()
+		
+		
+		// save the id
+		let id = task.id
+		
+		
+		// get task from database
+		let getTask = jcore.tasks.match(id: id).fetchFirst()
 		
 		
 		// check if the task exists with the specified name
-		XCTAssert(jcore.tasks.fetchFirst()?.name == "Hello, World!")
+		XCTAssertNotNil(getTask)
 		
 		
 		// remove the task from the database
@@ -31,7 +40,7 @@ class CoreDataTests: XCTestCase {
 		
 		
 		// check if the task is nil (was removed properly)
-		XCTAssert(jcore.tasks.fetchOrNil() == nil)
+		XCTAssertNil(jcore.tasks.match(id: id).fetchFirst())
 		
 	}
 	
