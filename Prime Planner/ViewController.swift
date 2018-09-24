@@ -287,7 +287,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		// create our detail controller and pass the task string into its detail text variable
 		let taskDetailViewController = TaskDetailViewController()
-		taskDetailViewController.detailTextPassedFromPreviousController = task.name!
+		taskDetailViewController.detailTextPassedFromPreviousController = task.name
 		
 		
 		// push our detail controller onto the navigation stack
