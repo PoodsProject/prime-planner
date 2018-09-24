@@ -203,16 +203,6 @@ class ViewController: UIViewController {
 		let taskDetailViewController = TaskEditViewController()
 		
 		
-		// add a done button for navigating back
-		// we target the taskDetailViewController itself, because that's
-		// where the action 'dismissModal' resides
-		taskDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
-			barButtonSystemItem: .done,
-			target: taskDetailViewController,
-			action: #selector(TaskEditViewController.dismissModal)
-		)
-		
-		
 		// create new nav controller for a modal presentation
 		let navigation = UINavigationController(rootViewController: taskDetailViewController)
 
