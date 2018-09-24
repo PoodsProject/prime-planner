@@ -22,7 +22,6 @@ class TaskEditViewController: UIViewController {
 	let nameTextField = UITextField()
 	
 	var task: Task?
-	var name = ""
 	var creationDate = Date()
 	var dueDate: Date?
 	var priority = TaskPriority.none
@@ -56,7 +55,7 @@ class TaskEditViewController: UIViewController {
 		
 		
 		// load our data from the task (this means we're in view / edit mode)
-		name = task.name
+		nameTextField.text = task.name
 		creationDate = task.creationDate
 		dueDate = task.dueDate
 		priority = task.priority
@@ -79,7 +78,6 @@ class TaskEditViewController: UIViewController {
 		// setup the name text field
 		nameTextField.translatesAutoresizingMaskIntoConstraints = false
 		nameTextField.placeholder = "Task Name"
-		nameTextField.text = name
 		nameTextField.textAlignment = .center
 		nameTextField.font = UIFont.systemFont(ofSize: 24)
 		view.addSubview(nameTextField)
@@ -245,20 +243,37 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 @objc extension TaskEditViewController {
 	
 	func cancelButtonPressed() {
-		
 		dismissModal()
-		
 	}
 	
 	func doneButtonPressed() {
 		
 		// guard against empty name field
 		// if field is empty, focus it and do not dismiss
-		guard nameTextField.text != "" else {
+		guard let name = nameTextField.text, name != "" else {
 			nameTextField.becomeFirstResponder()
 			return
 		}
 		
+		
+		// get the original task, if it exists
+		// if not, create a new task
+		let task = self.task ?? Task(name: name)
+		
+		
+		// set all task values
+		task.name = name
+		task.creationDate = creationDate
+		task.dueDate = dueDate
+		task.priority = priority
+		task.note = note
+		
+		
+		// save the database; the task will be inserted/updated automatically
+		jcore.save()
+		
+		
+		// dismiss the edit controller
 		dismissModal()
 		
 	}
