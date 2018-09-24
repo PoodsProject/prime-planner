@@ -11,6 +11,16 @@ import CoreData
 
 enum TaskPriority: Int16 {
 	case none, low, medium, high
+	
+	var string: String {
+		switch self {
+		case .low:		return "Low"
+		case .medium:	return "Medium"
+		case .high:		return "High"
+		default:		return "None"
+		}
+	}
+	
 }
 
 
