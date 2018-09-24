@@ -28,6 +28,7 @@ enum TaskPriority: Int16 {
 class Task: NSManagedObject {
 	
 	// @NSManaged means this Task object is managed by the core database
+	@NSManaged var id: UUID
 	@NSManaged var name: String
 	@NSManaged var creationDate: Date
 	@NSManaged var dueDate: Date?
@@ -48,6 +49,7 @@ class Task: NSManagedObject {
 	// here we create an convenience initializer that will insert a new Task with the given name into the database
 	convenience init(name: String) {
 		self.init(context: jcore.context)
+		self.id = UUID()
 		self.name = name
 		self.creationDate = Date()
 		self.priority = .none

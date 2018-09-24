@@ -19,6 +19,8 @@ extension JCore {
 
 extension JCoreRequest where T: Task {
 	
-	
+	func match(id: UUID) -> JCoreRequest {
+		return filter("id == %@", id)
+	}
 	
 }
