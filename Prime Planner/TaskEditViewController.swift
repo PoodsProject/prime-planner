@@ -21,13 +21,15 @@ class TaskEditViewController: UIViewController {
 	let tableView = UITableView(frame: .zero, style: .grouped)
 	let nameTextField = UITextField()
 	
-	let taskFields = [
-		"Date",
-		"Due",
-		"Priority",
-		"Note"
-	]
 	var task: Task?
+	var name = ""
+	var creationDate = Date()
+	var dueDate: Date?
+	var priority = TaskPriority.none
+	var note = ""
+	
+	// use a tuple of a property and value, for our taskFields
+	var taskFields = [(property: String, value: String)]()
 	
 	
 	override func viewDidLoad() {
@@ -35,26 +37,62 @@ class TaskEditViewController: UIViewController {
 		
 		view.backgroundColor = .white
 		
+		loadData()
+		loadTaskFields()
 		layoutTextField()
 		layoutTableView()
 		
+		// hide our navigation bar for this controller
+		// we will use our own navigation to get back
 		navigationController?.setNavigationBarHidden(true, animated: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
+		
+		// when this view controller is dismissing
+		// show the navigation bar again
 		navigationController?.setNavigationBarHidden(false, animated: true)
+	}
+	
+	func loadData() {
+		
+		
+		// check if task exists, else return (this means we're in creation mode)
+		guard let task = task else { return }
+		
+		
+		// load our data from the task (this means we're in view / edit mode)
+		name = task.name
+		creationDate = task.creationDate
+		dueDate = task.dueDate
+		priority = task.priority
+		note = task.note
+		
+	}
+	
+	func loadTaskFields() {
+		
+		taskFields.append(("Date", creationDate.string))
+		taskFields.append(("Due", dueDate?.string ?? "None"))
+		taskFields.append(("Priority", priority.string))
+		taskFields.append(("Note", note != "" ? note : "None"))
+		
 	}
 	
 	func layoutTextField() {
 		
+		
+		// setup the name text field
 		nameTextField.translatesAutoresizingMaskIntoConstraints = false
 		nameTextField.placeholder = "Task Name"
-		nameTextField.text = task?.name
+		nameTextField.text = name
 		nameTextField.textAlignment = .center
 		nameTextField.font = UIFont.systemFont(ofSize: 24)
 		view.addSubview(nameTextField)
 		
+		
+		// setup nameTF constraints (constrained to the top of the view)
 		NSLayoutConstraint.activate([
 			
 			nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor),
@@ -107,7 +145,8 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 			cell = UITableViewCell(style: .value1, reuseIdentifier: "EditCell")
 		}
 		
-		cell.textLabel?.text = taskFields[indexPath.row]
+		cell.textLabel?.text = taskFields[indexPath.row].property
+		cell.detailTextLabel?.text = taskFields[indexPath.row].value
 		
 		return cell
 	}
