@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 	// create our static data
 	// this will change into a 'var' once we have task adding/removing set up,
 	// because the data will need to change when users add/remove tasks
-	private var data = jcore.tasks.fetch()
+	private var data = [Task]()
 	
 	
 	// this function is a notification that is called when the view
@@ -75,6 +75,22 @@ class ViewController: UIViewController {
 			dateLabel.text = Date.todayString
 			dateLabel.sizeToFit()
 		}
+		
+		// reload the data, updating tasks if needed
+		reloadData()
+		
+	}
+	
+	
+	func reloadData() {
+		
+		
+		// fetch the tasks from the core database
+		data = jcore.tasks.fetch()
+		
+		
+		// reload the tableView
+		tableView.reloadData()
 		
 	}
 	
