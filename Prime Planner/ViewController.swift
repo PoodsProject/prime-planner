@@ -23,12 +23,7 @@ class ViewController: UIViewController {
 	// create our static data
 	// this will change into a 'var' once we have task adding/removing set up,
 	// because the data will need to change when users add/remove tasks
-	private let data = [
-		"Task 1",
-		"Task 2",
-		"Task 3",
-		"Task 4"
-	]
+	private var data = jcore.tasks.fetch()
 	
 	
 	// this function is a notification that is called when the view
@@ -205,8 +200,8 @@ class ViewController: UIViewController {
 		
 		
 		// create our detail controller
-		let taskDetailViewController = TaskDetailViewController()
-		taskDetailViewController.detailTextPassedFromPreviousController = "New Task"
+		let taskDetailViewController = TaskEditViewController()
+		
 		
 		// add a done button for navigating back
 		// we target the taskDetailViewController itself, because that's
@@ -214,12 +209,14 @@ class ViewController: UIViewController {
 		taskDetailViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .done,
 			target: taskDetailViewController,
-			action: #selector(TaskDetailViewController.dismissModal)
+			action: #selector(TaskEditViewController.dismissModal)
 		)
+		
 		
 		// create new nav controller for a modal presentation
 		let navigation = UINavigationController(rootViewController: taskDetailViewController)
 
+		
 		// push vc onto the nav stack
 		present(navigation, animated: true, completion: nil)
 		
@@ -242,7 +239,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		// we pass the number of objects in our data array,
 		// since we need one row per data object
-		return data.count
+		return data.count != 0 ? data.count : 1
 		
 	}
 	
@@ -260,7 +257,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		// set the cell's task to the data object from the
 		// data array at the specified index. indexPath.row returns the
 		// current tableview row in which this cell will reside
-		cell.setTask(task: data[indexPath.row])
+		if data.count != 0 {
+			cell.setTask(task: data[indexPath.row])
+		} else {
+			cell.textLabel?.text = "Create a New Task"
+		}
+		
 		
 		
 		// return our cell to the tableview datasource
@@ -273,6 +275,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 	// delegate function that is called when a user taps on a cell
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
+		guard data.count != 0 else { return }
 		
 		// let's deselect this row, so that it doesn't stay selected when we come back
 		tableView.deselectRow(at: indexPath, animated: true)
@@ -284,7 +287,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		// create our detail controller and pass the task string into its detail text variable
 		let taskDetailViewController = TaskDetailViewController()
-		taskDetailViewController.detailTextPassedFromPreviousController = task
+		taskDetailViewController.detailTextPassedFromPreviousController = task.name!
 		
 		
 		// push our detail controller onto the navigation stack
