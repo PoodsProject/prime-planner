@@ -48,7 +48,7 @@ class TaskCell: UITableViewCell {
 		let checkboxSize: CGFloat = 35
 		
 		checkbox.translatesAutoresizingMaskIntoConstraints = false
-		checkbox.addTarget(checkbox, action: #selector(Checkbox.checkBoxTapped), for: .touchUpInside)
+		checkbox.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
 		contentView.addSubview(checkbox)
 		
 		NSLayoutConstraint.activate([
@@ -61,6 +61,13 @@ class TaskCell: UITableViewCell {
 			])
 		
 		
+	}
+	
+	
+	// toggles the check image and calls the action
+	@objc func checkBoxTapped() {
+		checkbox.checkBoxTapped()
+		checkboxAction?()
 	}
 	
 	

@@ -25,13 +25,12 @@ class Checkbox: UIButton {
 		
 	}
 	
-	@objc func checkBoxTapped() {
+	func checkBoxTapped() {
 		
 		// if selected then deselect else select
 		// ! = not, so this is just toggling between selected state
 		isSelected = !isSelected
 		
-		print("Checkbox Tapped!")
 	}
 	
 }
