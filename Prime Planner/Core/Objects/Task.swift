@@ -33,6 +33,8 @@ class Task: NSManagedObject {
 	@NSManaged var creationDate: Date
 	@NSManaged var dueDate: Date?
 	@NSManaged var note: String
+	@NSManaged var cleared: Bool
+	
 	
 	// we disabled automatic management here, because we want
 	// to manage this specific property ourselves
