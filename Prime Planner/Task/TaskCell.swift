@@ -17,14 +17,14 @@ class TaskCell: UITableViewCell {
 	
 	
 	// keep track of the task connected to this cell
-	var task: Task?
+	var task: Task!
 	
 	
 	// this is a block handler that we will use for the checkbox button action
 	// the first pair of parenthesis hold the parameters from the call being passed to the block.
 	// the second pair of parenthesis is the return from the block being passed back to the call.
 	// Both are empty because we are not passing / returning anything as of yet.
-	var checkboxAction: (() -> ())?
+	var checkboxAction: ((Task, Bool) -> ())?
 	
 	
 	required init?(coder aDecoder: NSCoder) { fatalError() }
@@ -67,7 +67,7 @@ class TaskCell: UITableViewCell {
 	// toggles the check image and calls the action
 	@objc func checkBoxTapped() {
 		checkbox.checkBoxTapped()
-		checkboxAction?()
+		checkboxAction?(task, checkbox.isChecked)
 	}
 	
 	

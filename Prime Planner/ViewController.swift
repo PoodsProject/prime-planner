@@ -258,20 +258,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		// tableviews reuse cells, to increase performance,
 		// especially for large numbers of rows
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
-		cell.checkbox.isHidden = false
-		cell.indentationLevel = 5
 		
-		// set the cell's task to the data object from the
-		// data array at the specified index. indexPath.row returns the
-		// current tableview row in which this cell will reside
-		if data.count != 0 {
-			cell.setTask(task: data[indexPath.row])
-		} else {
+		
+		// guard against no tasks in the data array
+		guard data.count != 0 else {
 			cell.textLabel?.text = "No Tasks"
 			cell.checkbox.isHidden = true
 			cell.indentationLevel = 0
+			return cell
 		}
 		
+		
+		// set our cell properties
+		cell.checkbox.isHidden = false
+		cell.indentationLevel = 5
+		cell.setTask(task: data[indexPath.row])
+		cell.checkboxAction = { task, isChecked in
+			task.cleared = isChecked
+			jcore.save()
+		}
 		
 		
 		// return our cell to the tableview datasource
