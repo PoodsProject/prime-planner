@@ -33,7 +33,7 @@ class Task: NSManagedObject {
 	@NSManaged var creationDate: Date
 	@NSManaged var dueDate: Date?
 	@NSManaged var note: String
-	@NSManaged var cleared: Bool
+	@NSManaged var isChecked: Bool
 	
 	
 	// we disabled automatic management here, because we want
@@ -56,7 +56,7 @@ class Task: NSManagedObject {
 		self.creationDate = Date()
 		self.priority = .none
 		self.note = ""
-		self.cleared = false
+		self.isChecked = false
 	}
 	
 	
