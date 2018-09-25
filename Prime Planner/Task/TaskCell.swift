@@ -16,6 +16,10 @@ class TaskCell: UITableViewCell {
 	let checkbox = Checkbox()
 	
 	
+	// keep track of the task connected to this cell
+	var task: Task?
+	
+	
 	// this is a block handler that we will use for the checkbox button action
 	// the first pair of parenthesis hold the parameters from the call being passed to the block.
 	// the second pair of parenthesis is the return from the block being passed back to the call.
@@ -60,9 +64,10 @@ class TaskCell: UITableViewCell {
 	}
 	
 	
-	// For now task is a String. This will change to take in a Task object
-    func setTask(task: Task){
-        textLabel?.text = task.name
+	// sets the task property of this cell as well as the name
+	func setTask(task: Task){
+        self.task = task
+		textLabel?.text = task.name
     }
 	
     
