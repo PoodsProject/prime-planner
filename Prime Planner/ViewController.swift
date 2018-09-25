@@ -270,11 +270,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		
 		// set our cell properties
+		let task = data[indexPath.row]
 		cell.checkbox.isHidden = false
+		cell.checkbox.isChecked = task.isChecked
 		cell.indentationLevel = 5
-		cell.setTask(task: data[indexPath.row])
+		cell.setTask(task: task)
 		cell.checkboxAction = { task, isChecked in
-			task.cleared = isChecked
+			task.isChecked = isChecked
 			jcore.save()
 		}
 		

@@ -11,7 +11,14 @@ import UIKit
 
 class Checkbox: UIButton {
 	
-	var isChecked: Bool { return isSelected }
+	var isChecked: Bool {
+		get {
+			return isSelected
+		}
+		set {
+			isSelected = newValue
+		}
+	}
 	
 	private let imageOn = #imageLiteral(resourceName: "checked-1")
 	private let imageOff = #imageLiteral(resourceName: "unchecked-1")
