@@ -56,6 +56,7 @@ class Task: NSManagedObject {
 		self.creationDate = Date()
 		self.priority = .none
 		self.note = ""
+		self.cleared = false
 	}
 	
 	
