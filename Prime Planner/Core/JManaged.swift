@@ -2,7 +2,7 @@
 //  JManaged.swift
 //  Money
 //
-//  Created by Jacob Caraballo on 8/18/18.
+//  Created by Jacob Caraballo on 9/18/18.
 //  Copyright © 2018 Jacob Caraballo. All rights reserved.
 //
 

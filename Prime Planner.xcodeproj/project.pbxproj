@@ -15,6 +15,9 @@
 		16307F8321418D47008B2783 /* Prime_PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16307F8221418D47008B2783 /* Prime_PlannerTests.swift */; };
 		16AD69A5214F0BA2002BD255 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AD69A4214F0BA2002BD255 /* TaskCell.swift */; };
 		16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AD69A7214F120A002BD255 /* Checkbox.swift */; };
+		16B078E9216273F90072D71C /* JCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B078E6216273F90072D71C /* JCalendar.swift */; };
+		16B078EA216273F90072D71C /* JCalendarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B078E7216273F90072D71C /* JCalendarPage.swift */; };
+		16B078EB216273F90072D71C /* JCalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B078E8216273F90072D71C /* JCalendarViewCell.swift */; };
 		16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5ED4214B8A0B00A6B066 /* JCoreRequest.swift */; };
 		16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5ED5214B8A0B00A6B066 /* JManaged.swift */; };
 		16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5ED6214B8A0B00A6B066 /* JCoreArray.swift */; };
@@ -51,6 +54,9 @@
 		16307F8421418D47008B2783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16AD69A4214F0BA2002BD255 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		16AD69A7214F120A002BD255 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		16B078E6216273F90072D71C /* JCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCalendar.swift; sourceTree = "<group>"; };
+		16B078E7216273F90072D71C /* JCalendarPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCalendarPage.swift; sourceTree = "<group>"; };
+		16B078E8216273F90072D71C /* JCalendarViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCalendarViewCell.swift; sourceTree = "<group>"; };
 		16BA5ED4214B8A0B00A6B066 /* JCoreRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCoreRequest.swift; sourceTree = "<group>"; };
 		16BA5ED5214B8A0B00A6B066 /* JManaged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JManaged.swift; sourceTree = "<group>"; };
 		16BA5ED6214B8A0B00A6B066 /* JCoreArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCoreArray.swift; sourceTree = "<group>"; };
@@ -136,9 +142,20 @@
 			path = Task;
 			sourceTree = "<group>";
 		};
+		16B078EC216274000072D71C /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				16B078E6216273F90072D71C /* JCalendar.swift */,
+				16B078E7216273F90072D71C /* JCalendarPage.swift */,
+				16B078E8216273F90072D71C /* JCalendarViewCell.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		16BA5ED3214B8A0B00A6B066 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				16B078EC216274000072D71C /* Calendar */,
 				16BA5ED7214B8A0B00A6B066 /* Objects */,
 				16BA5ED4214B8A0B00A6B066 /* JCoreRequest.swift */,
 				16BA5ED5214B8A0B00A6B066 /* JManaged.swift */,
@@ -271,9 +288,11 @@
 				16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */,
 				16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */,
 				16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */,
+				16B078EA216273F90072D71C /* JCalendarPage.swift in Sources */,
 				16BA5EE3214B8A0B00A6B066 /* JCore.swift in Sources */,
 				16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */,
 				16AD69A5214F0BA2002BD255 /* TaskCell.swift in Sources */,
+				16B078EB216273F90072D71C /* JCalendarViewCell.swift in Sources */,
 				16307F7021418D45008B2783 /* ViewController.swift in Sources */,
 				16BA5EE5214B8A0B00A6B066 /* JCore.xcdatamodeld in Sources */,
 				16BA5EE8214B8A1A00A6B066 /* TaskDetailViewController.swift in Sources */,
@@ -282,6 +301,7 @@
 				16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */,
 				16BA5EE4214B8A0B00A6B066 /* JCoreRequest-Task.swift in Sources */,
 				16307F6E21418D45008B2783 /* AppDelegate.swift in Sources */,
+				16B078E9216273F90072D71C /* JCalendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

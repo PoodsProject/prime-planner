@@ -2,7 +2,7 @@
 //  JCore.swift
 //  JCore
 //
-//  Created by Jacob Caraballo on 8/6/18.
+//  Created by Jacob Caraballo on 9/6/18.
 //  Copyright © 2018 Jacob Caraballo. All rights reserved.
 //
 
