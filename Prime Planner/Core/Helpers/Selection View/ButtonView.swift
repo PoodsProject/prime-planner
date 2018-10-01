@@ -170,7 +170,7 @@ class ButtonView: UIView {
 			
 			])
 		
-		let distance: CGFloat = buttons.count > 1 ? 1.0 : 0
+		let distance: CGFloat = buttons.count > 1 ? 2 : 0
 		
 		var fixedButtons = [ButtonViewButton]()
 		
@@ -217,7 +217,7 @@ class ButtonView: UIView {
 		isLast: Bool
 		) -> UIButton	{
 		
-		let distance: CGFloat = buttons.count > 1 ? 0.8 : 0
+		let distance: CGFloat = buttons.count > 1 ? 2 : 0
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = buttonColor
