@@ -18,16 +18,23 @@ import UIKit
 
 class TaskEditViewController: UIViewController {
 	
-	let tableView = UITableView(frame: .zero, style: .grouped)
-	let nameTextField = UITextField()
+	private enum TaskFieldKey: String {
+		case date = "Due Date"
+		case priority = "Priority"
+		case note = "Note"
+	}
+	
+	private let tableView = UITableView(frame: .zero, style: .grouped)
+	private let nameTextField = UITextField()
 	
 	var task: Task?
-	var dueDate: Date?
-	var priority = TaskPriority.none
-	var note = ""
+	private var dueDate: Date?
+	private var priority = TaskPriority.none
+	private var note = ""
 	
 	// use a tuple of a property and value, for our taskFields
-	var taskFields = [(property: String, value: String)]()
+	private var taskFields = [TaskFieldKey: String]()
+	private var taskFieldKeys: [TaskFieldKey] = [ .date, .priority, .note ]
 	
 	
 	override func viewDidLoad() {
@@ -63,9 +70,9 @@ class TaskEditViewController: UIViewController {
 	
 	func loadTaskFields() {
 		
-		taskFields.append(("Due Date", dueDate?.string ?? "None"))
-		taskFields.append(("Priority", priority.string))
-		taskFields.append(("Note", note != "" ? note : "None"))
+		taskFields[.date] = dueDate?.string ?? "None"
+		taskFields[.priority] = priority.string
+		taskFields[.note] = note != "" ? note : "None"
 		
 	}
 	
@@ -211,7 +218,7 @@ class TaskEditViewController: UIViewController {
 extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return taskFields.count
+		return taskFieldKeys.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -221,10 +228,51 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 			cell = UITableViewCell(style: .value1, reuseIdentifier: "EditCell")
 		}
 		
-		cell.textLabel?.text = taskFields[indexPath.row].property
-		cell.detailTextLabel?.text = taskFields[indexPath.row].value
+		let key = taskFieldKeys[indexPath.row]
+		cell.textLabel?.text = key.rawValue
+		cell.detailTextLabel?.text = taskFields[key]
 		
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		guard let cell = tableView.cellForRow(at: indexPath) else { return }
+		
+		tableView.deselectRow(at: indexPath, animated: true)
+		
+		let key = taskFieldKeys[indexPath.row]
+		
+		switch key {
+		case .date:
+			let date: Date
+			if let detail = cell.detailTextLabel?.text {
+				date = Date(string: detail)
+			} else {
+				date = dueDate ?? Date()
+			}
+			
+			SelectionViewController.present(self, type: .calendar, object: date) { item, cancel in
+				
+				guard !cancel else { return }
+				
+				let date = item?.object as? Date
+				self.dueDate = date
+				self.taskFields[key] = date?.string ?? "None"
+				self.tableView.reloadData()
+				
+			}
+			
+		case .priority:
+			break
+			
+		case .note:
+			break
+			
+		}
+		
+		
+		
 	}
 	
 	// used to dismiss when presented as a modal

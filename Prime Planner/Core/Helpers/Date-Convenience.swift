@@ -481,7 +481,7 @@ extension Date {
 			formatter.dateStyle = .long
 		}
 		
-		self = formatter.date(from: string)!
+		self = formatter.date(from: string) ?? Date()
 		
 	}
 	
