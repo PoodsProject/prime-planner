@@ -22,7 +22,6 @@ class TaskEditViewController: UIViewController {
 	let nameTextField = UITextField()
 	
 	var task: Task?
-	var creationDate = Date()
 	var dueDate: Date?
 	var priority = TaskPriority.none
 	var note = ""
@@ -56,7 +55,6 @@ class TaskEditViewController: UIViewController {
 		
 		// load our data from the task (this means we're in view / edit mode)
 		nameTextField.text = task.name
-		creationDate = task.creationDate
 		dueDate = task.dueDate
 		priority = task.priority
 		note = task.note
@@ -65,8 +63,7 @@ class TaskEditViewController: UIViewController {
 	
 	func loadTaskFields() {
 		
-		taskFields.append(("Date", creationDate.string))
-		taskFields.append(("Due", dueDate?.string ?? "None"))
+		taskFields.append(("Due Date", dueDate?.string ?? "None"))
 		taskFields.append(("Priority", priority.string))
 		taskFields.append(("Note", note != "" ? note : "None"))
 		
@@ -263,7 +260,6 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		// set all task values
 		task.name = name
-		task.creationDate = creationDate
 		task.dueDate = dueDate
 		task.priority = priority
 		task.note = note
