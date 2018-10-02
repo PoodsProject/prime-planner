@@ -12,55 +12,58 @@ enum SelectionType {
 }
 
 class SelectionItem {
-	var note: String?
-	var title: String?
+	
+	// gets the object-related title
+	var title: String? {
+		
+		if let priority = object as? TaskPriority {
+			return priority.string
+		}
+		
+		return nil
+		
+	}
+	
+	
+	// object that is 'selected'
 	var object: Any?
-	var objects: [Any?]?
-	var set: Set<AnyHashable>?
-	var info: [AnyHashable: Any]?
-	var titles: [String]?
 	
 	
-	init(note: String?) {
-		self.note = note
+	// init with a selected object
+	init(object: Any?) {
+		self.object = object
 	}
 	
-	init(titles: [String]) {
-		self.titles = titles
-	}
 	
+	// default init
 	init() { }
-	
-	subscript(index: Int) -> String {
-		return titles![index]
-	}
-	
-	var count: Int {
-		return titles?.count ?? 0
-	}
 	
 }
 
 class SelectionItems {
 	var type: SelectionType
-	var objects: [Any]?
 	var priorityTypes: [TaskPriority] = [.none, .low, .medium, .high]
 	
 	
+	// init with selection type (note, calendar, priority)
 	init(type: SelectionType) {
 		self.type = type
 	}
 	
+	
+	// returns the number of items represented in this selection
+	// or returns 0 if the selection doesn't represent an array of items
 	var count: Int {
 		return type == .priority ? priorityTypes.count : 0
 	}
 	
+	
+	// returns the selection item at the given index
 	subscript(index: Int) -> SelectionItem {
 		
 		let item = SelectionItem()
 		
 		if type == .priority {
-			item.title = priorityTypes[index].string
 			item.object = priorityTypes[index]
 		}
 		

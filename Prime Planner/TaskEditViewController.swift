@@ -264,10 +264,26 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 			}
 			
 		case .priority:
-			break
+			SelectionViewController.present(self, type: .priority, object: priority) { item, cancel in
+				
+				guard !cancel, let priority = item?.object as? TaskPriority else { return }
+				
+				self.priority = priority
+				self.taskFields[key] = priority.string
+				self.tableView.reloadData()
+				
+			}
 			
 		case .note:
-			break
+			SelectionViewController.present(self, type: .note, object: note) { item, cancel in
+				
+				guard !cancel, let note = item?.object as? String else { return }
+				
+				self.note = note
+				self.taskFields[key] = note
+				self.tableView.reloadData()
+				
+			}
 			
 		}
 		

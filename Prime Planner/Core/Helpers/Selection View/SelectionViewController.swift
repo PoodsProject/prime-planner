@@ -83,7 +83,7 @@ class SelectionViewController: UIViewController, UIViewControllerTransitioningDe
 			}
 			
 		case .note:
-			noteTextView.text = selected.note
+			noteTextView.text = selected.object as? String
 			
 		case .calendar:
 			break;
@@ -263,7 +263,6 @@ class SelectionViewController: UIViewController, UIViewControllerTransitioningDe
 		noteTextView.delegate = self
 		noteTextView.textColor = .black
 		noteTextView.autocapitalizationType = .sentences
-		noteTextView.keyboardAppearance = .dark
 		noteTextView.font = UIFont.systemFont(ofSize: 22)
 		noteTextView.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
 		noteTextView.tintColor = .black
@@ -288,7 +287,8 @@ class SelectionViewController: UIViewController, UIViewControllerTransitioningDe
 			var item: SelectionItem?
 			
 			if let note = noteTextView.text, note.replacingOccurrences(of: " ", with: "") != "" {
-				item = SelectionItem(note: note)
+				item = SelectionItem()
+				item?.object = note
 			}
 			
 			dismiss(item, cancelled: false)

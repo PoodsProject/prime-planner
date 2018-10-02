@@ -33,19 +33,6 @@ extension SelectionViewController {
 		
 	}
 	
-	class func present(_ parent: UIViewController, note: String?, completion: ((_ item: SelectionItem?, _ cancelled: Bool) -> ())? = nil) {
-		
-		present(parent, type: .note, item: SelectionItem(note: note), showsNoItemSection: false, completion: completion)
-		
-		
-	}
-	
-	class func present(_ parent: UIViewController, type: SelectionType, completion: ((_ item: SelectionItem?, _ cancelled: Bool) -> ())? = nil) {
-		
-		present(parent, type: type, item: SelectionItem(), showsNoItemSection: false, completion: completion)
-		
-	}
-	
 	class func present(_ parent: UIViewController, type: SelectionType, object: Any?, completion: ((_ item: SelectionItem?, _ cancelled: Bool) -> ())? = nil) {
 		
 		let item = SelectionItem()

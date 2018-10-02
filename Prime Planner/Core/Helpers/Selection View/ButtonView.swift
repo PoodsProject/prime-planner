@@ -84,28 +84,6 @@ class ButtonView: UIView {
 		}
 	}
 	
-	convenience init(action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(image: "calc_plus", action:action)
-	}
-	convenience init(title: String, action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(titles: [title], action: action)
-	}
-	convenience init(image: String, action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(images: [image], action: action)
-	}
-	convenience init(button: ButtonViewButton, action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(buttons: [button], action: action)
-	}
-	convenience init(titles: [String], action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(titles: titles, buttons: nil, type: .default, action: action)
-	}
-	convenience init(images: [String], action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(titles: images, buttons: nil, type: .image, action: action)
-	}
-	convenience init(buttons: [ButtonViewButton], action: ((_ button: UIButton) -> ())? = nil) {
-		self.init(titles: nil, buttons: buttons, type: .button, action: action)
-	}
-	
 	fileprivate init(titles: [String]?, buttons: [ButtonViewButton]?, type: ButtonTitleType, action: ((_ button: UIButton) -> ())? = nil) {
 		
 		self.action = action
@@ -207,7 +185,9 @@ class ButtonView: UIView {
 		}
 	}
 	
-	fileprivate func addButton(
+	
+	// adds a new button to the button view
+	private func addButton(
 		_ name: String,
 		textColor: UIColor,
 		isImage: Bool,
@@ -297,15 +277,59 @@ class ButtonView: UIView {
 		
 		return button
 	}
+	
+	
+}
+
+
+
+// Button Selectors
+extension ButtonView {
+	
 	@objc func down(_ sender: UIButton) {
 		sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.8)
 	}
+	
+	
 	@objc func exit(_ sender: UIButton) {
 		sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1.0)
 	}
+	
+	
 	@objc func up(_ sender: UIButton) {
 		self.exit(sender)
 		action?(sender)
+	}
+	
+}
+
+
+
+// Initializers
+extension ButtonView {
+	
+	convenience init(title: String, action: ((_ button: UIButton) -> ())? = nil) {
+		self.init(titles: [title], action: action)
+	}
+	
+	convenience init(image: String, action: ((_ button: UIButton) -> ())? = nil) {
+		self.init(images: [image], action: action)
+	}
+	
+	convenience init(button: ButtonViewButton, action: ((_ button: UIButton) -> ())? = nil) {
+		self.init(buttons: [button], action: action)
+	}
+	
+	convenience init(titles: [String], action: ((_ button: UIButton) -> ())? = nil) {
+		self.init(titles: titles, buttons: nil, type: .default, action: action)
+	}
+	
+	convenience init(images: [String], action: ((_ button: UIButton) -> ())? = nil) {
+		self.init(titles: images, buttons: nil, type: .image, action: action)
+	}
+	
+	convenience init(buttons: [ButtonViewButton], action: ((_ button: UIButton) -> ())? = nil) {
+		self.init(titles: nil, buttons: buttons, type: .button, action: action)
 	}
 	
 }

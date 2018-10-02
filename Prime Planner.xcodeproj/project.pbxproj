@@ -158,13 +158,13 @@
 			children = (
 				16A9FEC32162893500CED314 /* KeyboardService.swift */,
 				16A9FEC02162820800CED314 /* ButtonView.swift */,
-				16A9FEC521628A0300CED314 /* SelectionViewController~TableView.swift */,
+				16A9FEB821627A1D00CED314 /* SelectionItems.swift */,
 				16A9FEB12162790100CED314 /* SelectionViewController.swift */,
+				16A9FEC521628A0300CED314 /* SelectionViewController~TableView.swift */,
 				16A9FEC721628BA500CED314 /* SelectionViewController~TextView.swift */,
 				16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */,
 				16A9FEBC21627B9500CED314 /* SelectionViewController~Calendar.swift */,
 				16A9FEBE21627BED00CED314 /* SelectionViewController~Presentation.swift */,
-				16A9FEB821627A1D00CED314 /* SelectionItems.swift */,
 			);
 			path = "Selection View";
 			sourceTree = "<group>";

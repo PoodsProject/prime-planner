@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
+		// add observer for keyboard height
+		KeyboardService.shared.setup(window!)
 		safeInsets.top = window!.safeAreaInsets.top
 		safeInsets.bottom = window!.safeAreaInsets.bottom
 		

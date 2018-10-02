@@ -34,7 +34,7 @@ extension SelectionViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.contentView.backgroundColor = UIColor.clear
 		cell.textLabel?.textColor = .black
 		
-		if name == selected.title {
+		if let object = selected.object as? TaskPriority, name == object.string {
 			cell.accessoryType = .checkmark
 		}
 		
