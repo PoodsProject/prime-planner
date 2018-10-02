@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+
+// handles the scaling animation of the selection views
 class SelectionAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
 	var presenting = true
 	var scalingView: UIView?

@@ -29,6 +29,8 @@ extension SelectionViewController: JCalendarDelegate {
 		
 	}
 	
+	
+	// calendar delegate that handles the dismissal of the calendar upon selection
 	func calendar(_ calendar: JCalendar, didSelectDate date: Date, selectedAutomatically: Bool, isReselecting: Bool) {
 		if !selectedAutomatically {
 			selected.object = date
@@ -36,6 +38,8 @@ extension SelectionViewController: JCalendarDelegate {
 		}
 	}
 	
+	
+	// calendar delegate that observes when the calendar height should change (number of weeks change)
 	func calendar(_ calendar: JCalendar, willUpdateHeight height: CGFloat) {
 		
 		let constant = calendar.headerHeight + height + buttonView.height

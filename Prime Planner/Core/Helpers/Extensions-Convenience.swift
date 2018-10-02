@@ -10,17 +10,25 @@ import Foundation
 import UIKit
 
 extension UIView {
+	
+	// sets the scale of this view
 	func setScale(_ scale: CGFloat, center: Bool = true) {
 		transform = CGAffineTransform(scaleX: scale, y: scale)
 	}
 	
+	
+	// sets the rotation of this view
 	func setRotation(angle: CGFloat) {
 		transform = CGAffineTransform(rotationAngle: angle)
 	}
+	
+	// sets the corner radius of this view
 	func setRadius(_ radius: CGFloat) {
 		self.layer.masksToBounds = true
 		self.layer.cornerRadius = radius
 	}
+	
+	// adds a border to the view
 	func setBorder(_ width: CGFloat, color: UIColor) {
 		self.layer.borderWidth = width
 		self.layer.borderColor = color.cgColor
@@ -29,6 +37,8 @@ extension UIView {
 
 
 extension UIImage {
+	
+	// returns the image filled with the given color
 	func image(withColor color: UIColor) -> UIImage {
 		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
 		color.setFill()

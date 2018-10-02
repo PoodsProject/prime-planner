@@ -18,11 +18,9 @@
 		16A9FEB72162799300CED314 /* Extensions-Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB62162799300CED314 /* Extensions-Convenience.swift */; };
 		16A9FEB921627A1D00CED314 /* SelectionItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB821627A1D00CED314 /* SelectionItems.swift */; };
 		16A9FEBD21627B9500CED314 /* SelectionViewController~Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEBC21627B9500CED314 /* SelectionViewController~Calendar.swift */; };
-		16A9FEBF21627BED00CED314 /* SelectionViewController~Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEBE21627BED00CED314 /* SelectionViewController~Presentation.swift */; };
 		16A9FEC12162820800CED314 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEC02162820800CED314 /* ButtonView.swift */; };
 		16A9FEC42162893500CED314 /* KeyboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEC32162893500CED314 /* KeyboardService.swift */; };
 		16A9FEC621628A0300CED314 /* SelectionViewController~TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEC521628A0300CED314 /* SelectionViewController~TableView.swift */; };
-		16A9FEC821628BA500CED314 /* SelectionViewController~TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEC721628BA500CED314 /* SelectionViewController~TextView.swift */; };
 		16AD69A5214F0BA2002BD255 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AD69A4214F0BA2002BD255 /* TaskCell.swift */; };
 		16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AD69A7214F120A002BD255 /* Checkbox.swift */; };
 		16B078E9216273F90072D71C /* JCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B078E6216273F90072D71C /* JCalendar.swift */; };
@@ -67,11 +65,9 @@
 		16A9FEB62162799300CED314 /* Extensions-Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions-Convenience.swift"; sourceTree = "<group>"; };
 		16A9FEB821627A1D00CED314 /* SelectionItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionItems.swift; sourceTree = "<group>"; };
 		16A9FEBC21627B9500CED314 /* SelectionViewController~Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SelectionViewController~Calendar.swift"; sourceTree = "<group>"; };
-		16A9FEBE21627BED00CED314 /* SelectionViewController~Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SelectionViewController~Presentation.swift"; sourceTree = "<group>"; };
 		16A9FEC02162820800CED314 /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		16A9FEC32162893500CED314 /* KeyboardService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardService.swift; sourceTree = "<group>"; };
 		16A9FEC521628A0300CED314 /* SelectionViewController~TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SelectionViewController~TableView.swift"; sourceTree = "<group>"; };
-		16A9FEC721628BA500CED314 /* SelectionViewController~TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SelectionViewController~TextView.swift"; sourceTree = "<group>"; };
 		16AD69A4214F0BA2002BD255 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		16AD69A7214F120A002BD255 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		16B078E6216273F90072D71C /* JCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JCalendar.swift; sourceTree = "<group>"; };
@@ -159,12 +155,10 @@
 				16A9FEC32162893500CED314 /* KeyboardService.swift */,
 				16A9FEC02162820800CED314 /* ButtonView.swift */,
 				16A9FEB821627A1D00CED314 /* SelectionItems.swift */,
+				16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */,
 				16A9FEB12162790100CED314 /* SelectionViewController.swift */,
 				16A9FEC521628A0300CED314 /* SelectionViewController~TableView.swift */,
-				16A9FEC721628BA500CED314 /* SelectionViewController~TextView.swift */,
-				16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */,
 				16A9FEBC21627B9500CED314 /* SelectionViewController~Calendar.swift */,
-				16A9FEBE21627BED00CED314 /* SelectionViewController~Presentation.swift */,
 			);
 			path = "Selection View";
 			sourceTree = "<group>";
@@ -326,7 +320,6 @@
 				16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */,
 				16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */,
 				16A9FEC12162820800CED314 /* ButtonView.swift in Sources */,
-				16A9FEC821628BA500CED314 /* SelectionViewController~TextView.swift in Sources */,
 				16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */,
 				16A9FEC621628A0300CED314 /* SelectionViewController~TableView.swift in Sources */,
 				16B078EA216273F90072D71C /* JCalendarPage.swift in Sources */,
@@ -345,7 +338,6 @@
 				16A9FEB72162799300CED314 /* Extensions-Convenience.swift in Sources */,
 				16A9FEB52162793A00CED314 /* SelectionAnimationController.swift in Sources */,
 				16A9FEB22162790100CED314 /* SelectionViewController.swift in Sources */,
-				16A9FEBF21627BED00CED314 /* SelectionViewController~Presentation.swift in Sources */,
 				16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */,
 				16BA5EE4214B8A0B00A6B066 /* JCoreRequest-Task.swift in Sources */,
 				16307F6E21418D45008B2783 /* AppDelegate.swift in Sources */,
