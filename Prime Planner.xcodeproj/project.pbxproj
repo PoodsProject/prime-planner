@@ -37,6 +37,9 @@
 		16BA5EE8214B8A1A00A6B066 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */; };
 		16C327662153181E00ED13C6 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C327652153181E00ED13C6 /* CoreDataTests.swift */; };
 		16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3276721531F2000ED13C6 /* TaskEditViewController.swift */; };
+		AA1FB1942166865B00AC17E2 /* ViewControllerCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FB1932166865A00AC17E2 /* ViewControllerCalender.swift */; };
+		AA1FB19621668B9700AC17E2 /* ViewControllerDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FB19521668B9700AC17E2 /* ViewControllerDashboard.swift */; };
+		AA8C06BB2165911B00A87697 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8C06BA2165911B00A87697 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,9 @@
 		16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		16C327652153181E00ED13C6 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		16C3276721531F2000ED13C6 /* TaskEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
+		AA1FB1932166865A00AC17E2 /* ViewControllerCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCalender.swift; sourceTree = "<group>"; };
+		AA1FB19521668B9700AC17E2 /* ViewControllerDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDashboard.swift; sourceTree = "<group>"; };
+		AA8C06BA2165911B00A87697 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +134,12 @@
 				16BA5ED3214B8A0B00A6B066 /* Core */,
 				16AD69A9214F1F87002BD255 /* Task */,
 				16307F6D21418D45008B2783 /* AppDelegate.swift */,
-				16307F6F21418D45008B2783 /* ViewController.swift */,
+				AA8C06BA2165911B00A87697 /* File.swift */,
 				16C3276721531F2000ED13C6 /* TaskEditViewController.swift */,
 				16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */,
+				16307F6F21418D45008B2783 /* ViewController.swift */,
+				AA1FB19521668B9700AC17E2 /* ViewControllerDashboard.swift */,
+				AA1FB1932166865A00AC17E2 /* ViewControllerCalender.swift */,
 				16307F7121418D45008B2783 /* Main.storyboard */,
 				16307F7421418D46008B2783 /* Assets.xcassets */,
 				16307F7621418D46008B2783 /* LaunchScreen.storyboard */,
@@ -318,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */,
+				AA1FB1942166865B00AC17E2 /* ViewControllerCalender.swift in Sources */,
 				16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */,
 				16A9FEC12162820800CED314 /* ButtonView.swift in Sources */,
 				16BA5EE0214B8A0B00A6B066 /* JManaged.swift in Sources */,
@@ -327,6 +337,7 @@
 				16BA5EE3214B8A0B00A6B066 /* JCore.swift in Sources */,
 				16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */,
 				16A9FEB921627A1D00CED314 /* SelectionItems.swift in Sources */,
+				AA1FB19621668B9700AC17E2 /* ViewControllerDashboard.swift in Sources */,
 				16AD69A5214F0BA2002BD255 /* TaskCell.swift in Sources */,
 				16B078EB216273F90072D71C /* JCalendarViewCell.swift in Sources */,
 				16307F7021418D45008B2783 /* ViewController.swift in Sources */,
@@ -340,6 +351,7 @@
 				16A9FEB22162790100CED314 /* SelectionViewController.swift in Sources */,
 				16AD69A8214F120A002BD255 /* Checkbox.swift in Sources */,
 				16BA5EE4214B8A0B00A6B066 /* JCoreRequest-Task.swift in Sources */,
+				AA8C06BB2165911B00A87697 /* File.swift in Sources */,
 				16307F6E21418D45008B2783 /* AppDelegate.swift in Sources */,
 				16B078E9216273F90072D71C /* JCalendar.swift in Sources */,
 			);

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "checkbox_green.jpg",
+      "filename" : "checklist_one.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "checkbox_green-1.jpg",
+      "filename" : "checklist_one-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "checkbox_green-2.jpg",
+      "filename" : "checklist_one-2.png",
       "scale" : "3x"
     }
   ],
