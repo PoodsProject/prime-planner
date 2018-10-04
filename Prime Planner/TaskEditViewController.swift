@@ -291,7 +291,9 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 		
 	}
 	
-	// used to dismiss when presented as a modal
+	// dismiss the controller
+	// if task doesn't exist, dismiss as a modal
+	// if task exists, pop the controller from the navigation controller
 	@objc func dismissController() {
 		if task == nil {
 			dismiss(animated: true, completion: nil)
