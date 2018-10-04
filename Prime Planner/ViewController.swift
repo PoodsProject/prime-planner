@@ -305,15 +305,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		
 		// create our detail controller and pass the task string into its detail text variable
-		let taskDetailViewController = TaskDetailViewController()
-		taskDetailViewController.detailTextPassedFromPreviousController = task.name
+//		let taskDetailViewController = TaskDetailViewController()
+//		taskDetailViewController.detailTextPassedFromPreviousController = task.name
 		
 		
 		// push our detail controller onto the navigation stack
 		// navigationController has a '?' after it, just to follow
 		// the protocol that there is a possibility for a navcontroller
 		// to be nil (not exist), although we do know that it does exist
+		
+		
+		
+		// create our detail controller
+		let taskDetailViewController = TaskEditViewController()
+		taskDetailViewController.task = task
+		
+		
+		// push vc onto the nav stack
 		navigationController?.pushViewController(taskDetailViewController, animated: true)
+		
 		
 	}
 	

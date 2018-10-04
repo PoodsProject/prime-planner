@@ -292,8 +292,12 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	// used to dismiss when presented as a modal
-	@objc func dismissModal() {
-		dismiss(animated: true, completion: nil)
+	@objc func dismissController() {
+		if task == nil {
+			dismiss(animated: true, completion: nil)
+		} else {
+			navigationController?.popViewController(animated: true)
+		}
 	}
 	
 }
@@ -304,7 +308,7 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 @objc extension TaskEditViewController {
 	
 	func cancelButtonPressed() {
-		dismissModal()
+		dismissController()
 	}
 	
 	func doneButtonPressed() {
@@ -334,7 +338,7 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		
 		// dismiss the edit controller
-		dismissModal()
+		dismissController()
 		
 	}
 	
