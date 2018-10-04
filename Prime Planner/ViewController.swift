@@ -330,8 +330,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             jcore.remove(task)
             data.remove(at: indexPath.row)
             
-            // reload database
-            tableView.reloadData()
+            // reload database            
+            tableView.deleteRows(at: [indexPath], with: .middle)
         }
     }
 	
