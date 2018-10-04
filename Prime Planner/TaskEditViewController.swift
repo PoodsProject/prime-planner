@@ -84,6 +84,8 @@ class TaskEditViewController: UIViewController {
 		nameTextField.placeholder = "Task Name"
 		nameTextField.textAlignment = .center
 		nameTextField.font = UIFont.systemFont(ofSize: 24)
+		nameTextField.returnKeyType = .done
+		nameTextField.delegate = self
 		view.addSubview(nameTextField)
 		
 		
@@ -291,9 +293,15 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 		
 	}
 	
-	// used to dismiss when presented as a modal
-	@objc func dismissModal() {
-		dismiss(animated: true, completion: nil)
+	// dismiss the controller
+	// if task doesn't exist, dismiss as a modal
+	// if task exists, pop the controller from the navigation controller
+	@objc func dismissController() {
+		if task == nil {
+			dismiss(animated: true, completion: nil)
+		} else {
+			navigationController?.popViewController(animated: true)
+		}
 	}
 	
 }
@@ -304,7 +312,7 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 @objc extension TaskEditViewController {
 	
 	func cancelButtonPressed() {
-		dismissModal()
+		dismissController()
 	}
 	
 	func doneButtonPressed() {
@@ -334,8 +342,18 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		
 		// dismiss the edit controller
-		dismissModal()
+		dismissController()
 		
+	}
+	
+}
+
+
+extension TaskEditViewController: UITextFieldDelegate {
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
 	}
 	
 }
