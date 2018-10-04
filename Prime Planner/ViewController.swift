@@ -314,6 +314,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		
 	}
+    // delegate fuction that will delete task specified by user
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard data.count != 0 else { return }
+        
+        // checks if function passes .delete
+        if (editingStyle == .delete) {
+            
+            print("Task Deleted")
+            
+            let task = data[indexPath.row]
+            
+            // remove task from database
+            jcore.remove(task)
+            data.remove(at: indexPath.row)
+            
+            // reload database
+            tableView.reloadData()
+        }
+    }
 	
 	
 }
