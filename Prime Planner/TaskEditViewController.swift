@@ -84,6 +84,8 @@ class TaskEditViewController: UIViewController {
 		nameTextField.placeholder = "Task Name"
 		nameTextField.textAlignment = .center
 		nameTextField.font = UIFont.systemFont(ofSize: 24)
+		nameTextField.returnKeyType = .done
+		nameTextField.delegate = self
 		view.addSubview(nameTextField)
 		
 		
@@ -342,6 +344,16 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 		// dismiss the edit controller
 		dismissController()
 		
+	}
+	
+}
+
+
+extension TaskEditViewController: UITextFieldDelegate {
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
 	}
 	
 }
