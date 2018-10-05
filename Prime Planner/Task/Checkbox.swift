@@ -20,22 +20,25 @@ class Checkbox: UIButton {
 		}
 	}
 	
-	private let imageOn = #imageLiteral(resourceName: "checked-1")
-	private let imageOff = #imageLiteral(resourceName: "unchecked-1")
+	private let imageOn = UIImage(named: "checked-1")
 	
 	convenience init() {
 		self.init(frame: .zero)
 		
 		// set our images for normal and selected states
-		setImage(imageOff, for: .normal)
+		setImage(nil, for: .normal)
 		setImage(imageOn, for: .selected)
+		
+		
+		// style the checkbox with a radius and border
+		setRadius(3)
+		setBorder(1, color: UIColor(white: 0.8, alpha: 1))
 		
 	}
 	
 	func checkBoxTapped() {
 		
-		// if selected then deselect else select
-		// ! = not, so this is just toggling between selected state
+		// toggle between selected states
 		isSelected = !isSelected
 		
 	}
