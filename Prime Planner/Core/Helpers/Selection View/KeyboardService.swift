@@ -39,15 +39,15 @@ class KeyboardService {
 	
 	func setup(_ view: UIView) {
 		
+		guard size != .zero else { return }
+		
 		// creates an empty textfield, sets it as a responder and then resigns it
 		// this forces a call to the observer and retrieves the keyboard size
-		if size == .zero {
-			let tf = UITextField()
-			view.addSubview(tf)
-			tf.becomeFirstResponder()
-			tf.resignFirstResponder()
-			tf.removeFromSuperview()
-		}
+		let tf = UITextField()
+		view.addSubview(tf)
+		tf.becomeFirstResponder()
+		tf.resignFirstResponder()
+		tf.removeFromSuperview()
 		
 	}
 	
