@@ -99,6 +99,12 @@ class TaskEditViewController: UIViewController {
 			
 			])
 		
+		
+		// if in creation mode, focus nameTextField
+		if task == nil {
+			nameTextField.becomeFirstResponder()
+		}
+		
 	}
 	
 	func layoutDismissButtons() {
@@ -180,6 +186,7 @@ class TaskEditViewController: UIViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.rowHeight = 60
+		tableView.keyboardDismissMode = .onDrag
 		view.addSubview(tableView)
 		
 		
@@ -239,12 +246,24 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
+		
+		// get the cell at the selected row
 		guard let cell = tableView.cellForRow(at: indexPath) else { return }
 		
+		
+		// deselect the current row, so that it doesn't stay highlighted
 		tableView.deselectRow(at: indexPath, animated: true)
 		
+		
+		// this will dismiss the keyboard if it is currently showing
+		view.endEditing(true)
+		
+		
+		// get the key for the taskField that we are selecting
 		let key = taskFieldKeys[indexPath.row]
 		
+		
+		// go to the specified selection view, based on the key
 		switch key {
 		case .date:
 			let date: Date
@@ -351,9 +370,12 @@ extension TaskEditViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TaskEditViewController: UITextFieldDelegate {
 	
+	
+	// dismiss the keyboard when the return button is pressed
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
 		return true
 	}
+	
 	
 }
