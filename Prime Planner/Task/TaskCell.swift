@@ -31,7 +31,7 @@ class TaskCell: UITableViewCell {
 	
 	// layout the checkbox when the cell is initialized
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		super.init(style: .value1, reuseIdentifier: reuseIdentifier)
 		
 		// set an indentation, just to move over all the default content of the cell to fit our checkbox
 		indentationLevel = 5
@@ -75,6 +75,7 @@ class TaskCell: UITableViewCell {
 	func setTask(task: Task){
         self.task = task
 		textLabel?.text = task.name
+		detailTextLabel?.text = task.priority.symbol
     }
 	
     

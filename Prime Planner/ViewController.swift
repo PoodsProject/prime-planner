@@ -187,12 +187,11 @@ class ViewController: UIViewController {
 		
 		
 		// format and constraints for taskbutton
-        taskAddButton.setTitle("+", for: UIControlState.normal)
+        taskAddButton.setTitle("+", for: .normal)
         taskAddButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
         taskAddButton.tintColor = .black
-        taskAddButton.backgroundRect(forBounds: CGRect(x: self.view.center.x, y:  self.view.center.y, width: 60, height: 50))
         taskAddButton.backgroundColor = .white
-        taskAddButton.layer.cornerRadius = 4
+        taskAddButton.setRadius(10)
         taskAddButton.sizeToFit()
 		taskAddButton.addTarget(self, action: #selector(taskAddButtonPressed), for: .touchUpInside)
         
@@ -206,6 +205,7 @@ class ViewController: UIViewController {
             
             taskAddButton.centerXAnchor.constraint(equalTo: taskButContainerView.centerXAnchor),
             taskAddButton.centerYAnchor.constraint(equalTo: taskButContainerView.centerYAnchor),
+			taskAddButton.widthAnchor.constraint(equalTo: taskAddButton.heightAnchor)
             
             ])
         
@@ -245,7 +245,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		// we pass the number of objects in our data array,
 		// since we need one row per data object
-		return data.count != 0 ? data.count : 1
+		return data.count
 		
 	}
 	
@@ -314,27 +314,32 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		
 	}
-    // delegate fuction that will delete task specified by user
+	
+	
+	// delegate fuction that will delete task specified by user
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         guard data.count != 0 else { return }
         
         // checks if function passes .delete
         if (editingStyle == .delete) {
-            
-            print("Task Deleted")
-            
+			
             let task = data[indexPath.row]
             
             // remove task from database
             jcore.remove(task)
             data.remove(at: indexPath.row)
             
-            // reload database            
-            tableView.deleteRows(at: [indexPath], with: .middle)
+            // reload database
+			tableView.deleteRows(at: [indexPath], with: .top)
+			
         }
     }
 	
+	
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return data.count != 0
+	}
 	
 }
 

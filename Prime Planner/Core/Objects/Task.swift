@@ -21,6 +21,15 @@ enum TaskPriority: Int16 {
 		}
 	}
 	
+	var symbol: String {
+		switch self {
+		case .low:		return "!"
+		case .medium:	return "!!"
+		case .high:		return "!!!"
+		default:		return ""
+		}
+	}
+	
 }
 
 
