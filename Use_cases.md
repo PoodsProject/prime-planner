@@ -16,6 +16,7 @@
 14. User can check the checkbox besides the task
 
 ## Delete tasks ##
+1. User Swipes to the right and the task is deleted
 
 ## Navigate to other views ##
 1. Open application
