@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 enum TaskPriority: Int16 {
 	case none, low, medium, high
@@ -27,6 +28,15 @@ enum TaskPriority: Int16 {
 		case .medium:	return "!!"
 		case .high:		return "!!!"
 		default:		return ""
+		}
+	}
+	
+	var color: UIColor {
+		switch self {
+		case .low:		return .purple
+		case .medium:	return .orange
+		case .high:		return .red
+		default:		return .black
 		}
 	}
 	

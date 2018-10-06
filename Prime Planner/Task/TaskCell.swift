@@ -73,9 +73,23 @@ class TaskCell: UITableViewCell {
 	
 	// sets the task property of this cell as well as the name
 	func setTask(task: Task){
-        self.task = task
+		
+		// set the task for this cell
+		self.task = task
+		
+		
+		// set task name and priority
 		textLabel?.text = task.name
 		detailTextLabel?.text = task.priority.symbol
+		detailTextLabel?.textColor = task.priority.color
+		
+		
+		// set checkbox options
+		checkbox.isChecked = task.isChecked
+		checkboxAction = { task, isChecked in
+			task.isChecked = isChecked
+			jcore.save()
+		}
     }
 	
     
