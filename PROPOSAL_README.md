@@ -16,6 +16,11 @@
 ## Sprint 2 ## 
 * [Backlog](https://docs.google.com/spreadsheets/d/1Nysj_K4-QUsn_6kKBrEUE_sAhqnjedjYf9DnCkg8r1U/edit#gid=0)
 * [Burndown Chart](https://docs.google.com/spreadsheets/d/1Nysj_K4-QUsn_6kKBrEUE_sAhqnjedjYf9DnCkg8r1U/edit#gid=0)
-* [UML Diagram]
-* [Tests]
-* [Demo]()
+* UML Diagrams
+  * Architecture
+  * Class
+* [Requirements](https://github.com/PoodsProject/prime-planner/blob/master/Requirements.md)
+* Tests
+  * [Use Cases](https://github.com/PoodsProject/prime-planner/blob/master/Use_cases.md)
+  * Test cases (Included in Code Base)
+* [Demo](https://www.youtube.com/watch?v=peAU06BIvtg&feature=youtu.be)
