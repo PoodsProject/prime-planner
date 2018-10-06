@@ -260,15 +260,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCell
 		
 		
-		// guard against no tasks in the data array
-		guard data.count != 0 else {
-			cell.textLabel?.text = "No Tasks"
-			cell.checkbox.isHidden = true
-			cell.indentationLevel = 0
-			return cell
-		}
-		
-		
 		// set our cell properties
 		let task = data[indexPath.row]
 		cell.checkbox.isHidden = false
