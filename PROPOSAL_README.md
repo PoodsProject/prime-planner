@@ -1,11 +1,11 @@
 # prime-planner
 ## Mission Statement ##
-•	For students currently enrolled in High school and College courses 
-•	Our product assists students in keeping track of daily, weekly, and monthly tasks and preventing them from missing deadlines. 
-•	Product Planner, an organizational app for students 
-•	That leads to better grades, better jobs, better life, better future. 
-•	Unlike other applications our app incentivizes students to study by adding leaderboards so that they can see how they measure up against other people. It incites a feeling of friendly competition among students .
-•	Our product offers daily incentives to maximize our user retention and increase the utility of the app. 
+*	For students currently enrolled in High school and College courses 
+*	Our product assists students in keeping track of daily, weekly, and monthly tasks and preventing them from missing deadlines. 
+*	Product Planner, an organizational app for students 
+*	That leads to better grades, better jobs, better life, better future. 
+*	Unlike other applications our app incentivizes students to study by adding leaderboards so that they can see how they measure up against other people. It incites a feeling of friendly competition among students .
+*	Our product offers daily incentives to maximize our user retention and increase the utility of the app. 
 <br><br> [**Product Backlog**](https://docs.google.com/spreadsheets/d/1HSBoC19WC9w0YWZ5xD9QxapS4QA8zcKgTGT2fqvcHXQ/edit#gid=0)
 
 
