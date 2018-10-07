@@ -22,5 +22,5 @@
 * [Requirements](https://github.com/PoodsProject/prime-planner/blob/master/Requirements.md)
 * Tests
   * [Use Cases](https://github.com/PoodsProject/prime-planner/blob/master/Use_cases.md)
-  * Test cases (Included in Code Base)
+  * [Test cases](https://github.com/PoodsProject/prime-planner/tree/master/Prime%20PlannerTests)
 * [Demo](https://www.youtube.com/watch?v=peAU06BIvtg&feature=youtu.be)
