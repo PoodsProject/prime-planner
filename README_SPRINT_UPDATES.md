@@ -19,7 +19,7 @@
 * UML Diagrams
   * [Architecture](https://github.com/PoodsProject/prime-planner/blob/master/Sprint%202%20Architecture%20Design.xml)
   * [Class](https://github.com/PoodsProject/prime-planner/blob/master/Sprint%202%20UML.xml)
-* [Requirements](https://github.com/PoodsProject/prime-planner/blob/master/Requirements.md)
+* [Requirements](https://docs.google.com/document/d/1jTOyK_L0oS5ParN9OusFVdniWb1c-MgZWZLNv_J-OVw/edit?usp=sharing)
 * Tests
   * [Use Cases](https://github.com/PoodsProject/prime-planner/blob/master/Use_cases.md)
   * [Test cases](https://github.com/PoodsProject/prime-planner/tree/master/Prime%20PlannerTests)
