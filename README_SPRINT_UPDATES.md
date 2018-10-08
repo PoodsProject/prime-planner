@@ -17,8 +17,8 @@
 * [Backlog](https://docs.google.com/spreadsheets/d/1Nysj_K4-QUsn_6kKBrEUE_sAhqnjedjYf9DnCkg8r1U/edit#gid=0)
 * [Burndown Chart](https://docs.google.com/spreadsheets/d/1Nysj_K4-QUsn_6kKBrEUE_sAhqnjedjYf9DnCkg8r1U/edit#gid=0)
 * UML Diagrams
-  * Architecture
-  * Class
+  * [Architecture](https://github.com/PoodsProject/prime-planner/blob/master/Sprint%202%20Architecture%20Design.xml)
+  * [Class](https://github.com/PoodsProject/prime-planner/blob/master/Sprint%202%20Architecture%20Design.xml)
 * [Requirements](https://github.com/PoodsProject/prime-planner/blob/master/Requirements.md)
 * Tests
   * [Use Cases](https://github.com/PoodsProject/prime-planner/blob/master/Use_cases.md)
