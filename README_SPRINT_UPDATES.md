@@ -24,3 +24,15 @@
   * [Use Cases](https://github.com/PoodsProject/prime-planner/blob/master/Use_cases.md)
   * [Test cases](https://github.com/PoodsProject/prime-planner/tree/master/Prime%20PlannerTests)
 * [Demo](https://www.youtube.com/watch?v=peAU06BIvtg&feature=youtu.be)
+
+## Sprint 3 ## 
+* [Backlog](https://docs.google.com/spreadsheets/d/1VA_NIfjlXeLH4OkxnsuecHzvKW_QF0dxLrnsrLLLM74/edit#gid=0)
+* [Burndown Chart](https://docs.google.com/spreadsheets/d/1VA_NIfjlXeLH4OkxnsuecHzvKW_QF0dxLrnsrLLLM74/edit#gid=0)
+* UML Diagrams
+  * [Architecture]
+  * [Class]
+* [Requirements](https://docs.google.com/document/d/1c2AgvjSABRA5wteklnDUscMIhobxsfwpT0a17MMBafU/edit)
+* Tests
+  * [Use Cases]
+  * [Test cases]
+* [Demo]
