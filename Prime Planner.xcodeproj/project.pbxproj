@@ -13,6 +13,7 @@
 		16307F7521418D46008B2783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16307F7421418D46008B2783 /* Assets.xcassets */; };
 		16307F7821418D46008B2783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16307F7621418D46008B2783 /* LaunchScreen.storyboard */; };
 		16307F8321418D47008B2783 /* Prime_PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16307F8221418D47008B2783 /* Prime_PlannerTests.swift */; };
+		169FFDC5218254AF00AEC774 /* CalendarTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FFDC4218254AF00AEC774 /* CalendarTaskListView.swift */; };
 		16A9FEB22162790100CED314 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB12162790100CED314 /* SelectionViewController.swift */; };
 		16A9FEB52162793A00CED314 /* SelectionAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */; };
 		16A9FEB72162799300CED314 /* Extensions-Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB62162799300CED314 /* Extensions-Convenience.swift */; };
@@ -63,6 +64,7 @@
 		16307F7E21418D47008B2783 /* Prime PlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Prime PlannerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16307F8221418D47008B2783 /* Prime_PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime_PlannerTests.swift; sourceTree = "<group>"; };
 		16307F8421418D47008B2783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		169FFDC4218254AF00AEC774 /* CalendarTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTaskListView.swift; sourceTree = "<group>"; };
 		16A9FEB12162790100CED314 /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionAnimationController.swift; sourceTree = "<group>"; };
 		16A9FEB62162799300CED314 /* Extensions-Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions-Convenience.swift"; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				16307F6F21418D45008B2783 /* ViewController.swift */,
 				AA1FB19521668B9700AC17E2 /* ViewControllerDashboard.swift */,
 				AA1FB1932166865A00AC17E2 /* ViewControllerCalender.swift */,
+				169FFDC4218254AF00AEC774 /* CalendarTaskListView.swift */,
 				16307F7121418D45008B2783 /* Main.storyboard */,
 				16307F7421418D46008B2783 /* Assets.xcassets */,
 				16307F7621418D46008B2783 /* LaunchScreen.storyboard */,
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BA5EE1214B8A0B00A6B066 /* JCoreArray.swift in Sources */,
+				169FFDC5218254AF00AEC774 /* CalendarTaskListView.swift in Sources */,
 				AA1FB1942166865B00AC17E2 /* ViewControllerCalender.swift in Sources */,
 				16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */,
 				16A9FEC12162820800CED314 /* ButtonView.swift in Sources */,

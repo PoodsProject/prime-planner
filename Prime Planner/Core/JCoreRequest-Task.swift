@@ -23,4 +23,8 @@ extension JCoreRequest where T: Task {
 		return filter("id == %@", id)
 	}
 	
+	func match(range: DateRange) -> JCoreRequest {
+		return filter("dueDate >= %@ AND dueDate <= %@", range.start, range.end)
+	}
+	
 }
