@@ -39,6 +39,7 @@
 		16BA5EE8214B8A1A00A6B066 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */; };
 		16C327662153181E00ED13C6 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C327652153181E00ED13C6 /* CoreDataTests.swift */; };
 		16C3276821531F2000ED13C6 /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C3276721531F2000ED13C6 /* TaskEditViewController.swift */; };
+		63AA1198218E48ED00BD8FDE /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AA1197218E48ED00BD8FDE /* AppTheme.swift */; };
 		AA1FB1942166865B00AC17E2 /* ViewControllerCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FB1932166865A00AC17E2 /* ViewControllerCalender.swift */; };
 		AA1FB19621668B9700AC17E2 /* ViewControllerDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FB19521668B9700AC17E2 /* ViewControllerDashboard.swift */; };
 		AA8C06BB2165911B00A87697 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8C06BA2165911B00A87697 /* File.swift */; };
@@ -91,6 +92,7 @@
 		16BA5EE7214B8A1A00A6B066 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		16C327652153181E00ED13C6 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		16C3276721531F2000ED13C6 /* TaskEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
+		63AA1197218E48ED00BD8FDE /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		AA1FB1932166865A00AC17E2 /* ViewControllerCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCalender.swift; sourceTree = "<group>"; };
 		AA1FB19521668B9700AC17E2 /* ViewControllerDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDashboard.swift; sourceTree = "<group>"; };
 		AA8C06BA2165911B00A87697 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				16307F7421418D46008B2783 /* Assets.xcassets */,
 				16307F7621418D46008B2783 /* LaunchScreen.storyboard */,
 				16307F7921418D46008B2783 /* Info.plist */,
+				63AA1197218E48ED00BD8FDE /* AppTheme.swift */,
 			);
 			path = "Prime Planner";
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				16A9FEC621628A0300CED314 /* SelectionViewController~TableView.swift in Sources */,
 				16B078EA216273F90072D71C /* JCalendarPage.swift in Sources */,
 				16A9FEBD21627B9500CED314 /* SelectionViewController~Calendar.swift in Sources */,
+				63AA1198218E48ED00BD8FDE /* AppTheme.swift in Sources */,
 				16BA5EE3214B8A0B00A6B066 /* JCore.swift in Sources */,
 				16BA5EDF214B8A0B00A6B066 /* JCoreRequest.swift in Sources */,
 				16A9FEB921627A1D00CED314 /* SelectionItems.swift in Sources */,
