@@ -32,7 +32,7 @@ class Checkbox: UIButton {
 		
 		// style the checkbox with a radius and border
 		setRadius(3)
-		setBorder(1, color: UIColor(white: 0.8, alpha: 1))
+		setBorder(1, color: AppTheme.color())
 		
 	}
 	
