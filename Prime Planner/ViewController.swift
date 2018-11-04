@@ -18,9 +18,10 @@ class ViewController: UIViewController {
 	
     // add UI button
 	private let taskAddButton = UIButton(type: .system)
-	
-	
-	// create our static data
+	private let sortButton = UIButton(type: .system)
+    // private let orderButton = UIButton(type: .system)
+    
+    // create our static data
 	// this will change into a 'var' once we have task adding/removing set up,
 	// because the data will need to change when users add/remove tasks
 	private var data = [Task]()
@@ -49,14 +50,16 @@ class ViewController: UIViewController {
 		// layout our date view after the tableview is set up
 		// because we will place the date in the header of the tableview,
 		// so that it can scroll along with the table
-		layoutDateLabel()
-		
+        
+        layoutDateLabel()
 		
         // layout for task button
         layoutTaskAddButton()
+        //
+        // layoutOrderButton()
+        //layoutSortButton()
         
-		
-	}
+    }
 	
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -228,7 +231,56 @@ class ViewController: UIViewController {
 		
 		
 	}
-	
+    
+    func layoutSortButton() {
+        
+        // container for task button
+        // when using a container that goes into the header or footer of a tableview
+        // set the x and y to 0 and the width can be any number > 0, because the
+        // tableview will resize it to match the width of itself.
+        // the only thing we have to customize here would be the height, as
+        // the tableview will not resize that for us.
+        let sortButContainerView = UIView(frame: CGRect(x: 10, y: 0, width: 1, height: 100))
+        
+        
+        
+        // format and constraints for taskbutton
+        sortButton.setTitle("^", for: .normal)
+        sortButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
+        sortButton.tintColor = .black
+        sortButton.backgroundColor = .white
+        sortButton.setRadius(10)
+        sortButton.sizeToFit()
+        sortButton.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
+
+        
+        sortButContainerView.addSubview(sortButton)
+        
+        tableView.tableHeaderView!.addSubview(sortButContainerView)
+        
+        //tableView.tableHeaderView?.addSubview(sortButContainerView)
+        
+        //set container size to be below the container
+        NSLayoutConstraint.activate([
+            
+            sortButton.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            sortButton.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
+            sortButton.widthAnchor.constraint(equalTo: sortButton.heightAnchor)
+            
+            ])
+        
+        
+    }
+    
+    @objc func sortButtonPressed() {
+        
+        
+        data = jcore.tasks.sort("priority", ascending: true).fetch()
+        
+        tableView.reloadData()
+        
+        
+    }
 	
 }
 
