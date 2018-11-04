@@ -14,13 +14,15 @@ class ViewController: UIViewController {
 	// create and declare our tableview and dateLabel objects
 	private let tableView = UITableView(frame: .zero, style: .grouped)
 	private let dateLabel = UILabel()
-	
-	
+    private var directionClicked = true
+	private var descriptor = ""
     // add UI button
 	private let taskAddButton = UIButton(type: .system)
 	private let sortButton = UIButton(type: .system)
-    // private let orderButton = UIButton(type: .system)
-    
+    private let descriptorButton = UIButton(type: .system)
+    private let descriptors = ["name", "dueDate", "isChecked", "priority"]
+    private let descriptorsText = ["Name", "Date", "Checked", "Priority"]
+    private var descNum = 0
     // create our static data
 	// this will change into a 'var' once we have task adding/removing set up,
 	// because the data will need to change when users add/remove tasks
@@ -57,8 +59,9 @@ class ViewController: UIViewController {
         layoutTaskAddButton()
         //
         // layoutOrderButton()
-        //layoutSortButton()
+        layoutSortButton()
         
+        layoutDescriptorButton()
     }
 	
 	
@@ -240,12 +243,12 @@ class ViewController: UIViewController {
         // tableview will resize it to match the width of itself.
         // the only thing we have to customize here would be the height, as
         // the tableview will not resize that for us.
-        let sortButContainerView = UIView(frame: CGRect(x: 10, y: 0, width: 1, height: 100))
+        let sortButContainerView = UIView(frame: CGRect(x: 350, y: 50, width: 35, height: 100))
         
         
         
         // format and constraints for taskbutton
-        sortButton.setTitle("^", for: .normal)
+        sortButton.setTitle("↑", for: .normal)
         sortButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
         sortButton.tintColor = .black
         sortButton.backgroundColor = .white
@@ -256,35 +259,91 @@ class ViewController: UIViewController {
         
         sortButContainerView.addSubview(sortButton)
         
+        sortButContainerView.addSubview(sortButton)
+        
+        //tableView.tableFooterView = taskButContainerView
+        //tableView.tableFooterView = sortButContainerView
         tableView.tableHeaderView!.addSubview(sortButContainerView)
         
         //tableView.tableHeaderView?.addSubview(sortButContainerView)
         
         //set container size to be below the container
-        NSLayoutConstraint.activate([
-            
-            sortButton.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            sortButton.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
-            sortButton.widthAnchor.constraint(equalTo: sortButton.heightAnchor)
-            
-            ])
         
         
     }
     
     @objc func sortButtonPressed() {
-        
-        
-        data = jcore.tasks.sort("priority", ascending: true).fetch()
+        data = jcore.tasks.sort(descriptors[descNum], ascending: directionClicked).fetch()
+
+        if(directionClicked)
+        {
+            sortButton.setTitle("↓", for: .normal)
+            directionClicked = false
+        }
+        else
+        {
+            sortButton.setTitle("↑", for: .normal)
+            directionClicked = true
+        }
         
         tableView.reloadData()
         
         
     }
-	
+    
+    func layoutDescriptorButton() {
+        
+        // container for task button
+        // when using a container that goes into the header or footer of a tableview
+        // set the x and y to 0 and the width can be any number > 0, because the
+        // tableview will resize it to match the width of itself.
+        // the only thing we have to customize here would be the height, as
+        // the tableview will not resize that for us.
+        let descriptorButContainerView = UIView(frame: CGRect(x: 300, y: 65, width: 150, height: 100))
+        
+        
+        
+        // format and constraints for taskbutton
+        descriptorButton.setTitle(descriptorsText[descNum], for: .normal)
+        descriptorButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 15)
+        descriptorButton.tintColor = .black
+        descriptorButton.backgroundColor = .white
+        descriptorButton.setRadius(10)
+        descriptorButton.sizeToFit()
+        descriptorButton.addTarget(self, action: #selector(descriptorButtonPressed), for: .touchUpInside)
+        
+        
+        descriptorButContainerView.addSubview(descriptorButton)
+        
+        //tableView.tableFooterView = taskButContainerView
+        //tableView.tableFooterView = sortButContainerView
+        tableView.tableHeaderView!.addSubview(descriptorButContainerView)
+        
+        //tableView.tableHeaderView?.addSubview(sortButContainerView)
+        
+        //set container size to be below the container
+        
+        
+    }
+    
+    @objc func descriptorButtonPressed() {
+        
+        data = jcore.tasks.sort(descriptors[descNum], ascending: true).fetch()
+        descriptorButton.setTitle(descriptorsText[descNum], for: .normal)
+        if(descNum == 3)
+        {
+            descNum = 0
+        }
+        else
+        {
+            descNum = descNum + 1
+            
+        }
+        tableView.reloadData()
+        
+    }
+
 }
-
-
 
 // this extends the ViewController to implement the UITableViewDelegate/DataSource
 // this extension is not necessary and can be implemented above, straight into the controller,
