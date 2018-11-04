@@ -116,7 +116,7 @@ class ViewControllerCalender: UIViewController, JCalendarDelegate, JCalendarData
 		
 		// if a task exists in this date, mark the cell
 		if jcore.tasks.match(range: date.dayRange).fetchOrNil() != nil {
-			color =  UIColor(red: 1, green: 0.643, blue: 0.004, alpha: 1)
+			color =  AppTheme.color()
 		}
 		
 		return color
