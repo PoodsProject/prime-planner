@@ -33,28 +33,26 @@ class JCalendarPage: UIView {
 	private var horizontalGridLines = [UIView]()
 	private var heightConstraint: NSLayoutConstraint!
 	private var numberOfWeeks: Int {
-		return date.numberOfWeeksInMonth
+		return isWeekly ? 1 : date.numberOfWeeksInMonth
 	}
 	private var selectedCell: JCalendarViewCell?
+	private var isWeekly: Bool
 	
-	var monthHeight: CGFloat {
+	var pageHeight: CGFloat {
 		return (collectionView.bounds.size.width / CGFloat(numColumns)).rounded(.down) * CGFloat(numberOfWeeks)
 	}
-	
-//	private var verticalGridLines = [Int: UIView]()
-//	private var horizontalGridLines = [Int: UIView]()
-	
 	
 	
 	func setDate(_ date: Date, forceUpdateLayout: Bool = false) {
 		let oldValue = self.date
 		self.date = date
-		if forceUpdateLayout || !date.hasSameMonth(asDate: oldValue) {
+		if forceUpdateLayout || (!isWeekly && !date.hasSameMonth(asDate: oldValue) || (isWeekly && !date.contained(in: oldValue.weekRange))) {
 			updateLayout()
 		}
 	}
 	
-	init(date: Date = Date()) {
+	init(date: Date, isWeekly: Bool) {
+		self.isWeekly = isWeekly
 		self.date = date
 		
 		let flow = UICollectionViewFlowLayout()
@@ -112,7 +110,7 @@ class JCalendarPage: UIView {
 	
 	private func updateHeightConstraint() {
 		
-		let size = monthHeight
+		let size = pageHeight
 		guard heightConstraint.constant != size else { return }
 		
 		// activate height constraint if necessary
@@ -127,33 +125,80 @@ class JCalendarPage: UIView {
 		selectedCell = nil
 		days.removeAll()
 		
-		// add days of month
-		numberOfDays.add = date.numberOfDaysInMonth
-		for i in 1...numberOfDays.add {
-			days.append(i)
+		if isWeekly {
+			
+			// add days before week if necessary
+			if (!date.beginningOfWeek.contained(in: date.monthRange)) {
+				let firstDayInMonth = date.beginningOfMonth
+				let firstWeekdayInMonth = firstDayInMonth.weekday
+				let lastMonth = date.adding(month: -1)
+				let numberOfDaysLastMonth = lastMonth.numberOfDaysInMonth
+				numberOfDays.prepend = firstWeekdayInMonth - Calendar.current.firstWeekday
+				
+				for i in 0..<numberOfDays.prepend {
+					days.insert(numberOfDaysLastMonth - i, at: 0)
+				}
+			}
+			
+			
+			// add days in week
+			var currentDateInWeek = date.beginningOfWeek
+			for _ in 0..<7 {
+				guard currentDateInWeek.contained(in: date.monthRange) else {
+					currentDateInWeek = currentDateInWeek.adding(day: 1)
+					continue
+				}
+				
+				numberOfDays.add += 1
+				days.append(currentDateInWeek.day)
+				currentDateInWeek = currentDateInWeek.adding(day: 1)
+				
+			}
+			
+			
+			// add days after month if necessary
+			if (!date.endOfWeek.contained(in: date.monthRange)) {
+				let lastDayInMonth = date.endOfMonth
+				let lastWeekdayInMonth = lastDayInMonth.weekday
+				numberOfDays.append = Calendar.current.firstWeekday + Calendar.current.weekdaySymbols.count - 1 - lastWeekdayInMonth
+				
+				for i in 0..<numberOfDays.append {
+					days.append(i + 1)
+				}
+			}
+			
+			
+		} else {
+			// add days of month
+			numberOfDays.add = date.numberOfDaysInMonth
+			for i in 1...numberOfDays.add {
+				days.append(i)
+			}
+			
+			
+			// add days before month if necessary
+			let firstDayInMonth = date.beginningOfMonth
+			let firstWeekdayInMonth = firstDayInMonth.weekday
+			let lastMonth = date.adding(month: -1)
+			let numberOfDaysLastMonth = lastMonth.numberOfDaysInMonth
+			numberOfDays.prepend = firstWeekdayInMonth - Calendar.current.firstWeekday
+			
+			for i in 0..<numberOfDays.prepend {
+				days.insert(numberOfDaysLastMonth - i, at: 0)
+			}
+			
+			
+			// add days after month if necessary
+			let lastDayInMonth = date.endOfMonth
+			let lastWeekdayInMonth = lastDayInMonth.weekday
+			numberOfDays.append = Calendar.current.firstWeekday + Calendar.current.weekdaySymbols.count - 1 - lastWeekdayInMonth
+			
+			for i in 0..<numberOfDays.append {
+				days.append(i + 1)
+			}
 		}
 		
 		
-		// add days before month if necessary
-		let firstDayInMonth = date.beginningOfMonth
-		let firstWeekdayInMonth = firstDayInMonth.weekday
-		let lastMonth = date.adding(month: -1)
-		let numberOfDaysLastMonth = lastMonth.numberOfDaysInMonth
-		numberOfDays.prepend = firstWeekdayInMonth - Calendar.current.firstWeekday
-		
-		for i in 0..<numberOfDays.prepend {
-			days.insert(numberOfDaysLastMonth - i, at: 0)
-		}
-		
-		
-		// add days after month if necessary
-		let lastDayInMonth = date.endOfMonth
-		let lastWeekdayInMonth = lastDayInMonth.weekday
-		numberOfDays.append = Calendar.current.firstWeekday + Calendar.current.weekdaySymbols.count - 1 - lastWeekdayInMonth
-		
-		for i in 0..<numberOfDays.append {
-			days.append(i + 1)
-		}
 		
 		
 	}
@@ -168,27 +213,64 @@ class JCalendarPage: UIView {
 		select(day: date.day)
 	}
 	
-	func setDate(toMonthAfterDate date: Date) {
-		var date = date.adding(month: 1)
+	func setDate(toSectionAfterDate date: Date) {
 		
-		if date.hasSameMonth(asDate: Date()) {
-			date = Date()
+		var dateAfter: Date
+		
+		if !isWeekly {
+			// setup next month
+			dateAfter = date.adding(month: 1)
+			if dateAfter.hasSameMonth(asDate: Date()) {
+				dateAfter = Date()
+			} else {
+				dateAfter = dateAfter.beginningOfMonth
+			}
 		} else {
-			date = date.beginningOfMonth
+			
+			// setup next n weeks
+			dateAfter = date.adding(week: 1)
+			if dateAfter.weekRange.includes(date: Date()) {
+				dateAfter = Date()
+			} else {
+				dateAfter = dateAfter.beginningOfWeek
+			}
+			
 		}
-		setDate(date)
+		
+		setDate(dateAfter)
+		
 	}
 	
-	func setDate(toMonthBeforeDate date: Date) {
-		var date = date.adding(month: -1)
-		if date.hasSameMonth(asDate: Date()) {
-			date = Date()
+	func setDate(toSectionBeforeDate date: Date) {
+		
+		var dateBefore: Date
+		
+		if !isWeekly {
+			
+			// setup previous month
+			dateBefore = date.adding(month: -1)
+			if dateBefore.hasSameMonth(asDate: Date()) {
+				dateBefore = Date()
+			} else {
+				dateBefore = dateBefore.beginningOfMonth
+			}
+			
 		} else {
-			date = date.beginningOfMonth
+			
+			
+			// setup previous n weeks
+			dateBefore = date.adding(week: -1)
+			if dateBefore.weekRange.includes(date: Date()) {
+				dateBefore = Date()
+			} else {
+				dateBefore = dateBefore.beginningOfWeek
+			}
+			
 		}
-		setDate(date)
+		
+		setDate(dateBefore)
+		
 	}
-	
 	
 	
 }

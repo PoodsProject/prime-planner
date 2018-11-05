@@ -14,12 +14,16 @@ class ViewControllerDashboard: UIViewController {
 	
 	
 	let tableView = UITableView(frame: .zero, style: .grouped)
+	let calendarContainer = UIView()
+	let calendar = JCalendar(date: Date(), headerHeight: 60, isWeekly: true)
+	var calendarHeightConstraint: NSLayoutConstraint!
 	var tasks = [[Task]]()
-	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		navigationController?.setNavigationBarHidden(true, animated: false)
+		layoutCalendarView()
 		layoutTableView()
 		
 	}
@@ -46,8 +50,8 @@ class ViewControllerDashboard: UIViewController {
 		
 		
 		// fetch our tasks based on the created date ranges
-		let todayTasks = jcore.tasks.match(range: dayRange).sort("dueDate", ascending: false).fetch()
-		let weekTasks = jcore.tasks.match(range: weekRange).sort("dueDate", ascending: false).fetch()
+		let todayTasks = jcore.tasks.match(range: dayRange).sort("dueDate", ascending: true).fetch()
+		let weekTasks = jcore.tasks.match(range: weekRange).sort("dueDate", ascending: true).fetch()
 		let noDueDateTasks = jcore.tasks.filter("dueDate == nil").fetch()
 		let upcomingTasks = jcore.tasks.fetch().filter({ !todayTasks.contains($0) && !weekTasks.contains($0) && !noDueDateTasks.contains($0) })
 		
@@ -84,10 +88,66 @@ class ViewControllerDashboard: UIViewController {
 		// constraint dimensions to match the view (fills the entire view)
 		NSLayoutConstraint.activate([
 			
-			tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-			tableView.heightAnchor.constraint(equalTo: view.heightAnchor),
+			tableView.topAnchor.constraint(equalTo: calendarContainer.bottomAnchor),
+			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 			tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+			tableView.widthAnchor.constraint(equalTo: view.widthAnchor)
+			
+			])
+		
+		
+		// create a separator
+		let sep = UIView()
+		sep.translatesAutoresizingMaskIntoConstraints = false
+		sep.backgroundColor = UIColor(white: 0.95, alpha: 1)
+		view.addSubview(sep)
+		
+		NSLayoutConstraint.activate([
+			
+			sep.heightAnchor.constraint(equalToConstant: 2),
+			sep.widthAnchor.constraint(equalTo: view.widthAnchor),
+			sep.topAnchor.constraint(equalTo: tableView.topAnchor),
+			sep.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+			
+			])
+		
+	}
+	
+	
+	func layoutCalendarView() {
+		
+		
+		// setup the calendar container
+		calendarContainer.translatesAutoresizingMaskIntoConstraints = false
+		view.addSubview(calendarContainer)
+		
+		
+		// add container constraints
+		calendarHeightConstraint = calendarContainer.heightAnchor.constraint(equalToConstant: 150)
+		NSLayoutConstraint.activate([
+			
+			calendarContainer.widthAnchor.constraint(equalTo: view.widthAnchor),
+			calendarContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 10),
+			calendarHeightConstraint,
+			calendarContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+			
+			])
+		
+		
+		// setup calendar
+		calendar.delegate = self
+		calendar.dataSource = self
+		calendar.translatesAutoresizingMaskIntoConstraints = false
+		calendarContainer.addSubview(calendar)
+		
+		
+		// add calendar constraints
+		NSLayoutConstraint.activate([
+			
+			calendar.widthAnchor.constraint(equalTo: calendarContainer.widthAnchor),
+			calendar.heightAnchor.constraint(equalTo: calendarContainer.heightAnchor),
+			calendar.centerXAnchor.constraint(equalTo: calendarContainer.centerXAnchor),
+			calendar.centerYAnchor.constraint(equalTo: calendarContainer.centerYAnchor)
 			
 			])
 		
@@ -119,6 +179,9 @@ extension ViewControllerDashboard: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		
+		guard tasks[section].count != 0 else { return nil }
+		
 		switch section {
 		case 1: return "Today"
 		case 2: return "This Week"
@@ -126,6 +189,76 @@ extension ViewControllerDashboard: UITableViewDelegate, UITableViewDataSource {
 		default: return "No Due Date"
 		}
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		// let's deselect this row, so that it doesn't stay selected when we come back
+		tableView.deselectRow(at: indexPath, animated: true)
+		
+		
+		// guard function against empty data
+		guard tasks[indexPath.section].count != 0 else { return }
+		
+		
+		// get the task from the data array, using the row that was tapped
+		let task = tasks[indexPath.section][indexPath.row]
+		
+		
+		// create our detail controller
+		let taskDetailViewController = TaskEditViewController()
+		taskDetailViewController.task = task
+		
+		
+		// push vc onto the nav stack
+		navigationController?.pushViewController(taskDetailViewController, animated: true)
+		
+	}
+	
+	
+}
+
+
+extension ViewControllerDashboard: JCalendarDelegate, JCalendarDataSource {
+	
+	
+	func calendar(_ calendar: JCalendar, didSelectDate date: Date, selectedAutomatically: Bool, isReselecting: Bool) {
+		guard !isReselecting else { return }
+		// scroll to row
+	}
+	
+	func calendar(_ calendar: JCalendar, markerColorForDate date: Date) -> UIColor? {
+		var color: UIColor?
+		
+		// if a task exists in this date, mark the cell
+		if jcore.tasks.match(range: date.dayRange).fetchOrNil() != nil {
+			color =  AppTheme.color()
+		}
+		
+		return color
+	}
+	
+	func calendar(_ calendar: JCalendar, willUpdateHeight height: CGFloat) {
+		
+		let constant = calendar.headerHeight + height
+		guard calendarHeightConstraint.constant != constant else { return }
+		
+		let animate = calendarHeightConstraint.constant != 150
+		
+		view.layoutIfNeeded()
+		calendarHeightConstraint.constant = constant
+		
+		if animate {
+			let anim = UIViewPropertyAnimator(duration: 0.3, curve: .linear) {
+				self.view.layoutIfNeeded()
+			}
+			anim.startAnimation()
+		} else {
+			view.layoutIfNeeded()
+		}
+		
+	}
+	
+	
 	
 	
 }

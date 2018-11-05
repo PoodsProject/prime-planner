@@ -67,41 +67,66 @@ class JCalendar: UIView {
 	private let page2: JCalendarPage
 	private let page3: JCalendarPage
 	
-	var headerHeight: CGFloat {
-		return 88
-	}
+	var headerHeight: CGFloat
+	var isWeekly: Bool
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	init(date: Date = Date()) {
+	init(date: Date = Date(), headerHeight: CGFloat = 88, isWeekly: Bool = false) {
 		
 		self.date = date
+		self.headerHeight = headerHeight
+		self.isWeekly = isWeekly
 		
+		var dateBefore: Date
+		var dateAfter: Date
 		
-		// setup next month
-		var dateAfter = date.adding(month: 1)
-		if dateAfter.hasSameMonth(asDate: Date()) {
-			dateAfter = Date()
+		if !isWeekly {
+			// setup next month
+			dateAfter = date.adding(month: 1)
+			if dateAfter.hasSameMonth(asDate: Date()) {
+				dateAfter = Date()
+			} else {
+				dateAfter = dateAfter.beginningOfMonth
+			}
+			
+			
+			// setup previous month
+			dateBefore = date.adding(month: -1)
+			if dateBefore.hasSameMonth(asDate: Date()) {
+				dateBefore = Date()
+			} else {
+				dateBefore = dateBefore.beginningOfMonth
+			}
 		} else {
-			dateAfter = dateAfter.beginningOfMonth
+			
+			// setup next n weeks
+			dateAfter = date.adding(week: 1)
+			if dateAfter.weekRange.includes(date: Date()) {
+				dateAfter = Date()
+			} else {
+				dateAfter = dateAfter.beginningOfWeek
+			}
+			
+			
+			// setup previous n weeks
+			dateBefore = date.adding(week: -1)
+			if dateBefore.weekRange.includes(date: Date()) {
+				dateBefore = Date()
+			} else {
+				dateBefore = dateBefore.beginningOfWeek
+			}
+			
 		}
 		
-		
-		// setup previous month
-		var dateBefore = date.adding(month: -1)
-		if dateBefore.hasSameMonth(asDate: Date()) {
-			dateBefore = Date()
-		} else {
-			dateBefore = dateBefore.beginningOfMonth
-		}
 		
 		
 		// create pages
-		page1 = JCalendarPage(date: dateBefore)
-		page2 = JCalendarPage(date: date)
-		page3 = JCalendarPage(date: dateAfter)
+		page1 = JCalendarPage(date: dateBefore, isWeekly: isWeekly)
+		page2 = JCalendarPage(date: date, isWeekly: isWeekly)
+		page3 = JCalendarPage(date: dateAfter, isWeekly: isWeekly)
 				
 		
 		super.init(frame: .zero)
@@ -172,7 +197,7 @@ class JCalendar: UIView {
 		NSLayoutConstraint.activate([
 			
 			dateView.widthAnchor.constraint(equalTo: widthAnchor),
-			dateView.heightAnchor.constraint(equalToConstant: 44),
+			dateView.heightAnchor.constraint(equalToConstant: headerHeight / 2),
 			dateView.topAnchor.constraint(equalTo: topAnchor),
 			dateView.centerXAnchor.constraint(equalTo: centerXAnchor)
 			
@@ -226,7 +251,7 @@ class JCalendar: UIView {
 		NSLayoutConstraint.activate([
 			
 			weekView.widthAnchor.constraint(equalTo: widthAnchor),
-			weekView.heightAnchor.constraint(equalToConstant: 44),
+			weekView.heightAnchor.constraint(equalToConstant: headerHeight / 2),
 			weekView.centerXAnchor.constraint(equalTo: centerXAnchor),
 			weekView.topAnchor.constraint(equalTo: dateView.bottomAnchor)
 			
@@ -329,9 +354,9 @@ class JCalendar: UIView {
 	}
 	
 	private func resetPageDates() {
-		page1.setDate(toMonthBeforeDate: date)
+		page1.setDate(toSectionBeforeDate: date)
 		page2.setDate(date)
-		page3.setDate(toMonthAfterDate: date)
+		page3.setDate(toSectionAfterDate: date)
 		
 		page2.delegate?.calendarPage(page2, didSelectDate: date, selectedAutomatically: selectedPageAutomatically, isReselecting: false)
 		selectedPageAutomatically = true
@@ -341,26 +366,45 @@ class JCalendar: UIView {
 	
 	private func prepareForPageChange(direction: JDirection) {
 		let offset = direction == .backwards ? -1 : 1
-		var date = self.date.adding(month: offset)
-		if date.hasSameMonth(asDate: Date()) {
-			date = Date()
+		
+		var date: Date
+		if isWeekly {
+			date = self.date.adding(week: offset)
+			if date.weekRange.includes(date: Date()) {
+				date = Date()
+			} else {
+				date = date.beginningOfWeek
+			}
 		} else {
-			date = date.beginningOfMonth
+			date = self.date.adding(month: offset)
+			if date.hasSameMonth(asDate: Date()) {
+				date = Date()
+			} else {
+				date = date.beginningOfMonth
+			}
 		}
+		
 		self.date = date
 		updateContentOffsetForMovement(inDirection: direction)
 	}
 	
 	private func prepareHeightForPageChange(direction: JDirection, forceDate: Date?) {
 		
-		let offset = direction == .backwards ? -1 : 1
-		var date = forceDate ?? self.date.adding(month: offset)
-		if date.hasSameMonth(asDate: Date()) {
-			date = Date()
+		let numWeeks: Int
+		if isWeekly {
+			numWeeks = 1
 		} else {
-			date = date.beginningOfMonth
+			let offset = direction == .backwards ? -1 : 1
+			var date = forceDate ?? self.date.adding(month: offset)
+			if date.hasSameMonth(asDate: Date()) {
+				date = Date()
+			} else {
+				date = date.beginningOfMonth
+			}
+			numWeeks = date.numberOfWeeksInMonth
 		}
-		let numWeeks = date.numberOfWeeksInMonth
+		
+		scrollView.contentSize = CGSize(width: scrollView.frame.size.width * (3), height: scrollView.frame.size.height)
 		delegate?.calendar(self, willUpdateHeight: (frame.width / 7).rounded(.down) * CGFloat(numWeeks))
 		
 	}
@@ -405,7 +449,8 @@ class JCalendar: UIView {
 		
 		selectingDate = date
 		
-		if date.hasSameMonth(asDate: self.date) {
+		if (!isWeekly && date.hasSameMonth(asDate: self.date)) ||
+			(isWeekly && date.contained(in: self.date.weekRange)) {
 			page2.setDate(date)
 		} else {
 			
@@ -424,13 +469,15 @@ class JCalendar: UIView {
 	private func setDateViewLabelDate(_ date: Date) {
 		dateViewLabel.text = date.string(format: dateFormat)
 		
-		if date.hasSameMonth(asDate: Date()) {
+		if (!isWeekly && date.hasSameMonth(asDate: Date())) ||
+			(isWeekly && date.contained(in: Date().weekRange)) {
 			dateViewLabel.textColor = colorScheme.today
 			todayButton.isHidden = true
 		} else {
 			dateViewLabel.textColor = colorScheme.text
 			todayButton.isHidden = false
 		}
+		
 	}
 	
 	@objc private func todayButtonDown(_ sender: UIButton) {
