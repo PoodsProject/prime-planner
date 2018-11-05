@@ -13,11 +13,6 @@ import Foundation
 class ViewControllerDashboard: UIViewController {
 	
 	
-	enum DashboardSectionType: Int {
-		case none = 0, today, thisWeek, upcoming
-	}
-	
-	
 	let tableView = UITableView(frame: .zero, style: .grouped)
 	var tasks = [[Task]]()
 	
@@ -25,13 +20,25 @@ class ViewControllerDashboard: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		loadData()
 		layoutTableView()
 		
 	}
 	
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		// reload the data each time the view appears
+		loadData()
+		tableView.reloadData()
+	}
+	
+	
 	func loadData() {
+		
+		// clear out the previous data
+		tasks.removeAll()
+		
 		
 		// create ranges for day and week
 		let dayRange = Date().dayRange
@@ -42,23 +49,24 @@ class ViewControllerDashboard: UIViewController {
 		let todayTasks = jcore.tasks.match(range: dayRange).sort("dueDate", ascending: false).fetch()
 		let weekTasks = jcore.tasks.match(range: weekRange).sort("dueDate", ascending: false).fetch()
 		let noDueDateTasks = jcore.tasks.filter("dueDate == nil").fetch()
-		let upcomingTasks = jcore.tasks.fetch().filter({ todayTasks.contains($0) || weekTasks.contains($0) || noDueDateTasks.contains($0) })
+		let upcomingTasks = jcore.tasks.fetch().filter({ !todayTasks.contains($0) && !weekTasks.contains($0) && !noDueDateTasks.contains($0) })
 		
 		
 		// add the fetched tasks into the array
-		tasks[DashboardSectionType.none.rawValue] = noDueDateTasks
-		tasks[DashboardSectionType.today.rawValue] = todayTasks
-		tasks[DashboardSectionType.thisWeek.rawValue] = weekTasks
-		tasks[DashboardSectionType.upcoming.rawValue] = upcomingTasks
+		tasks.append(noDueDateTasks)
+		tasks.append(todayTasks)
+		tasks.append(weekTasks)
+		tasks.append(upcomingTasks)
 		
 	}
 	
 	
 	func layoutTableView() {
 		
-		// set tableview delegates
+		// set tableview delegates & row height
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.rowHeight = 70
 		
 		
 		// we are manually setting constraints so we turn autoconstraints off
@@ -110,7 +118,14 @@ extension ViewControllerDashboard: UITableViewDelegate, UITableViewDataSource {
 		
 	}
 	
-	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		switch section {
+		case 1: return "Today"
+		case 2: return "This Week"
+		case 3: return "Upcoming"
+		default: return "No Due Date"
+		}
+	}
 	
 	
 }
