@@ -27,6 +27,12 @@ class TaskCell: UITableViewCell {
 	var checkboxAction: ((Task, Bool) -> ())?
 	
 	
+	// attribute labels
+	var leftView = UIView()
+	var nameLabel = UILabel()
+	var dueDateLabel = UILabel()
+	
+	
 	required init?(coder aDecoder: NSCoder) { fatalError() }
 	
 	// layout the checkbox when the cell is initialized
@@ -38,6 +44,61 @@ class TaskCell: UITableViewCell {
 		
 		
 		layoutCheckbox()
+		layoutNameLabel()
+		layoutDueDateLabel()
+		layoutLeftView()
+		
+	}
+	
+	private func layoutLeftView() {
+		
+		leftView.translatesAutoresizingMaskIntoConstraints = false
+		contentView.addSubview(leftView)
+		
+		NSLayoutConstraint.activate([
+			
+			leftView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
+			leftView.heightAnchor.constraint(equalToConstant: nameLabel.frame.size.height + dueDateLabel.frame.size.height),
+			leftView.leadingAnchor.constraint(equalTo: checkbox.trailingAnchor, constant: separatorInset.left),
+			leftView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+			
+			])
+		
+	}
+	
+	private func layoutNameLabel() {
+		nameLabel.translatesAutoresizingMaskIntoConstraints = false
+		nameLabel.text = "Sizing Height Text"
+		nameLabel.sizeToFit()
+		nameLabel.text = nil
+		leftView.addSubview(nameLabel)
+		
+		NSLayoutConstraint.activate([
+			
+			nameLabel.widthAnchor.constraint(equalTo: leftView.widthAnchor),
+			nameLabel.leadingAnchor.constraint(equalTo: leftView.leadingAnchor),
+			nameLabel.topAnchor.constraint(equalTo: leftView.topAnchor)
+			
+			])
+	}
+	
+	private func layoutDueDateLabel() {
+		
+		dueDateLabel.translatesAutoresizingMaskIntoConstraints = false
+		dueDateLabel.textColor = UIColor(white: 0.4, alpha: 1.0)
+		dueDateLabel.font = UIFont.systemFont(ofSize: 15)
+		dueDateLabel.text = "Sizing Height Text"
+		dueDateLabel.sizeToFit()
+		dueDateLabel.text = nil
+		leftView.addSubview(dueDateLabel)
+		
+		NSLayoutConstraint.activate([
+			
+			dueDateLabel.widthAnchor.constraint(equalTo: leftView.widthAnchor),
+			dueDateLabel.leadingAnchor.constraint(equalTo: leftView.leadingAnchor),
+			dueDateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor)
+			
+			])
 		
 	}
 	
@@ -79,7 +140,16 @@ class TaskCell: UITableViewCell {
 		
 		
 		// set task name and priority
-		textLabel?.text = task.name
+		if let date = task.dueDate {
+			textLabel?.text = nil
+			nameLabel.text = task.name
+			dueDateLabel.text = date.string
+		} else {
+			textLabel?.text = task.name
+			nameLabel.text = nil
+			dueDateLabel.text = nil
+		}
+		
 		detailTextLabel?.text = task.priority.symbol
 		detailTextLabel?.textColor = task.priority.color
 		
