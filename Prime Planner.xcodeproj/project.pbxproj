@@ -14,6 +14,7 @@
 		16307F7821418D46008B2783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16307F7621418D46008B2783 /* LaunchScreen.storyboard */; };
 		16307F8321418D47008B2783 /* Prime_PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16307F8221418D47008B2783 /* Prime_PlannerTests.swift */; };
 		164736EE21837DAC00827361 /* CalendarDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164736ED21837DAC00827361 /* CalendarDataTests.swift */; };
+		1671E40021963164008E26FE /* DashboardDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1671E3FF21963164008E26FE /* DashboardDataTests.swift */; };
 		169FFDC5218254AF00AEC774 /* CalendarTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FFDC4218254AF00AEC774 /* CalendarTaskListView.swift */; };
 		16A9FEB22162790100CED314 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB12162790100CED314 /* SelectionViewController.swift */; };
 		16A9FEB52162793A00CED314 /* SelectionAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */; };
@@ -67,6 +68,7 @@
 		16307F8221418D47008B2783 /* Prime_PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime_PlannerTests.swift; sourceTree = "<group>"; };
 		16307F8421418D47008B2783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		164736ED21837DAC00827361 /* CalendarDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataTests.swift; sourceTree = "<group>"; };
+		1671E3FF21963164008E26FE /* DashboardDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataTests.swift; sourceTree = "<group>"; };
 		169FFDC4218254AF00AEC774 /* CalendarTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTaskListView.swift; sourceTree = "<group>"; };
 		16A9FEB12162790100CED314 /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		16A9FEB42162793A00CED314 /* SelectionAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionAnimationController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				16307F8221418D47008B2783 /* Prime_PlannerTests.swift */,
 				16C327652153181E00ED13C6 /* CoreDataTests.swift */,
 				164736ED21837DAC00827361 /* CalendarDataTests.swift */,
+				1671E3FF21963164008E26FE /* DashboardDataTests.swift */,
 				16307F8421418D47008B2783 /* Info.plist */,
 			);
 			path = "Prime PlannerTests";
@@ -372,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1671E40021963164008E26FE /* DashboardDataTests.swift in Sources */,
 				164736EE21837DAC00827361 /* CalendarDataTests.swift in Sources */,
 				16C327662153181E00ED13C6 /* CoreDataTests.swift in Sources */,
 				16307F8321418D47008B2783 /* Prime_PlannerTests.swift in Sources */,
