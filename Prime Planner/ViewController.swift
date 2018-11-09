@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 	// create and declare our tableview and dateLabel objects
 	private let tableView = UITableView(frame: .zero, style: .grouped)
 	private let dateLabel = UILabel()
-    private var directionClicked = true
+    private var directionIsAscending = true
 	private var descriptor = ""
     // add UI button
 	private let taskAddButton = UIButton(type: .system)
@@ -57,11 +57,9 @@ class ViewController: UIViewController {
 		
         // layout for task button
         layoutTaskAddButton()
-        //
-        // layoutOrderButton()
-        layoutSortButton()
-        
-        layoutDescriptorButton()
+		
+		// layout for sort buttons
+		layoutSortingButtons()
     }
 	
 	
@@ -92,7 +90,7 @@ class ViewController: UIViewController {
 		
 		
 		// fetch the tasks from the core database
-		data = jcore.tasks.fetch()
+		data = jcore.tasks.sort(descriptors[descNum], ascending: directionIsAscending).fetch()
 		
 		
 		// reload the tableView
@@ -167,7 +165,7 @@ class ViewController: UIViewController {
 		// constrain the dateLabel center (size is set above) to the container
 		NSLayoutConstraint.activate([
 			
-			dateLabel.centerXAnchor.constraint(equalTo: dateContainerView.centerXAnchor),
+			dateLabel.leadingAnchor.constraint(equalTo: dateContainerView.leadingAnchor, constant: 25),
 			dateLabel.centerYAnchor.constraint(equalTo: dateContainerView.centerYAnchor),
 			
 			])
@@ -234,110 +232,103 @@ class ViewController: UIViewController {
 		
 		
 	}
-    
-    func layoutSortButton() {
-        
-        // container for sort button
-        // when using a container that goes into the header or footer of a tableview
-        // set the x and y to 0 and the width can be any number > 0, because the
-        // tableview will resize it to match the width of itself.
-        // the only thing we have to customize here would be the height, as
-        // the tableview will not resize that for us.
-        let sortButContainerView = UIView(frame: CGRect(x: 350, y: 50, width: 300, height: 100))
-        
-        
-        
-        // format and constraints for sortButton
-        sortButton.setTitle("↑", for: .normal)
-        sortButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 30)
-        sortButton.tintColor = .black
-        sortButton.backgroundColor = .white
-        sortButton.setRadius(10)
-        sortButton.sizeToFit()
-        sortButton.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
-
-        // adding a subview so that the button is viewable
-        sortButContainerView.addSubview(sortButton)
-        
-        // Adding the previously made subview to the header
-        tableView.tableHeaderView!.addSubview(sortButContainerView)
-        
-        
-        
-    }
+	
+	func layoutSortingButtons() {
+		
+		let buttonWidth: CGFloat = 60
+		let buttonHeight: CGFloat = 30
+		let buttonPadding: CGFloat = 10
+		
+		// container for sort button
+		// when using a container that goes into the header or footer of a tableview
+		// set the x and y to 0 and the width can be any number > 0, because the
+		// tableview will resize it to match the width of itself.
+		// the only thing we have to customize here would be the height, as
+		// the tableview will not resize that for us.
+		let sortButContainerView = UIView(frame: CGRect(x: 0, y: 0, width: (buttonWidth * 2) + buttonPadding, height: buttonHeight))
+		sortButContainerView.translatesAutoresizingMaskIntoConstraints = false
+		
+		// format and constraints for Descriptorbutton
+		descriptorButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+		descriptorButton.setTitle(descriptorsText[descNum], for: .normal)
+		descriptorButton.titleLabel?.adjustsFontSizeToFitWidth = true;
+		descriptorButton.tintColor = .black
+		descriptorButton.backgroundColor = .white
+		descriptorButton.setRadius(5)
+		descriptorButton.addTarget(self, action: #selector(descriptorButtonPressed), for: .touchUpInside)
+		
+		
+		// adding the descriptor button to the header view
+		sortButContainerView.addSubview(descriptorButton)
+		
+		
+		// format and constraints for sortButton
+		sortButton.frame = CGRect(x: buttonWidth + buttonPadding, y: 0, width: buttonWidth, height: buttonHeight)
+		sortButton.setTitle("↓", for: .normal)
+		sortButton.tintColor = .black
+		sortButton.backgroundColor = .white
+		sortButton.setRadius(5)
+		sortButton.addTarget(self, action: #selector(sortButtonPressed), for: .touchUpInside)
+		
+		// adding a subview so that the button is viewable
+		sortButContainerView.addSubview(sortButton)
+		
+		
+		// Adding the previously made subview to the header
+		tableView.tableHeaderView!.addSubview(sortButContainerView)
+		
+		NSLayoutConstraint.activate([
+			
+			sortButContainerView.widthAnchor.constraint(equalToConstant: buttonWidth * 2 + buttonPadding),
+			sortButContainerView.heightAnchor.constraint(equalToConstant: buttonHeight),
+			sortButContainerView.centerYAnchor.constraint(equalTo: tableView.tableHeaderView!.centerYAnchor),
+			sortButContainerView.trailingAnchor.constraint(equalTo: tableView.tableHeaderView!.trailingAnchor, constant: -buttonPadding)
+			
+			])
+		
+	}
     
     @objc func sortButtonPressed() {
         
-        // This fetches the tasks from the database. Depending on the whether its ascending
+		// If clicked it toggles between the up and down arrow
+		if(directionIsAscending)
+		{
+			sortButton.setTitle("↑", for: .normal)
+			directionIsAscending = false
+		}
+		else
+		{
+			sortButton.setTitle("↓", for: .normal)
+			directionIsAscending = true
+		}
+		
+		
+		// This fetches the tasks from the database. Depending on the whether its ascending
         // descending  and the descriptor, the task order may change
-        data = jcore.tasks.sort(descriptors[descNum], ascending: directionClicked).fetch()
+        data = jcore.tasks.sort(descriptors[descNum], ascending: directionIsAscending).fetch()
+		
         
-        // If clicked it toggles between the up and down arrow
-        if(directionClicked)
-        {
-            sortButton.setTitle("↓", for: .normal)
-            directionClicked = false
-        }
-        else
-        {
-            sortButton.setTitle("↑", for: .normal)
-            directionClicked = true
-        }
-        
-        tableView.reloadData()
-        
-        
-    }
-    
-    func layoutDescriptorButton() {
-        
-        // container for Descriptor button
-        // when using a container that goes into the header or footer of a tableview
-        // set the x and y to 0 and the width can be any number > 0, because the
-        // tableview will resize it to match the width of itself.
-        // the only thing we have to customize here would be the height, as
-        // the tableview will not resize that for us.
-        let descriptorButContainerView = UIView(frame: CGRect(x: 300, y: 65, width: 300, height: 500))
-        
-        
-        
-        // format and constraints for Descriptorbutton
-        descriptorButton.setTitle(descriptorsText[descNum], for: .normal)
-        descriptorButton.titleLabel?.font = UIFont(name: "GeezaPro", size: 15)
-        descriptorButton.titleLabel?.adjustsFontSizeToFitWidth = true;
-        descriptorButton.tintColor = .black
-        descriptorButton.backgroundColor = .white
-        descriptorButton.setRadius(10)
-        descriptorButton.sizeToFit()
-        descriptorButton.addTarget(self, action: #selector(descriptorButtonPressed), for: .touchUpInside)
-        
-        // adding the descriptor button to the header view
-        descriptorButContainerView.addSubview(descriptorButton)
-        
-        tableView.tableHeaderView!.addSubview(descriptorButContainerView)
-        
+        reloadData()
         
         
     }
     
     @objc func descriptorButtonPressed() {
-        // updated fetching order
-        data = jcore.tasks.sort(descriptors[descNum], ascending: true).fetch()
+		
+		// If the button is at the end of the list, return to the beginning
+		if(descNum == descriptors.count - 1)
+		{
+			descNum = 0
+		}
+		else
+		{
+			descNum = descNum + 1
+		}
         
         // Changes the text on the button to the descriptor name
         descriptorButton.setTitle(descriptorsText[descNum], for: .normal)
-        
-        // If the button is at the end of the list, return to the beginning
-        if(descNum == 3)
-        {
-            descNum = 0
-        }
-        else
-        {
-            descNum = descNum + 1
-            
-        }
-        tableView.reloadData()
+		
+        reloadData()
         
     }
 
