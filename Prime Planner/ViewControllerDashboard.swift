@@ -18,6 +18,7 @@ class ViewControllerDashboard: UIViewController {
 	let calendar = JCalendar(date: Date(), headerHeight: 60, isWeekly: true)
 	var calendarHeightConstraint: NSLayoutConstraint!
 	var tasks = [[Task]]()
+	var taskHeaders = [String]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -42,25 +43,41 @@ class ViewControllerDashboard: UIViewController {
 		
 		// clear out the previous data
 		tasks.removeAll()
+		taskHeaders.removeAll()
 		
 		
 		// create ranges for day and week
 		let dayRange = Date().dayRange
-		let weekRange = DateRange(start: Date().adding(day: 1), end: Date().adding(day: 1).endOfWeek)
+		let weekRange = Date().weekRange
 		
 		
 		// fetch our tasks based on the created date ranges
 		let todayTasks = jcore.tasks.match(range: dayRange).sort("dueDate", ascending: true).fetch()
-		let weekTasks = jcore.tasks.match(range: weekRange).sort("dueDate", ascending: true).fetch()
+		let weekTasks = jcore.tasks.match(range: weekRange).sort("dueDate", ascending: true).fetch().filter({ !todayTasks.contains($0) })
 		let noDueDateTasks = jcore.tasks.filter("dueDate == nil").fetch()
 		let upcomingTasks = jcore.tasks.fetch().filter({ !todayTasks.contains($0) && !weekTasks.contains($0) && !noDueDateTasks.contains($0) })
 		
 		
 		// add the fetched tasks into the array
-		tasks.append(noDueDateTasks)
-		tasks.append(todayTasks)
-		tasks.append(weekTasks)
-		tasks.append(upcomingTasks)
+		if !noDueDateTasks.isEmpty {
+			tasks.append(noDueDateTasks)
+			taskHeaders.append("No Due Date")
+		}
+		
+		if !todayTasks.isEmpty {
+			tasks.append(todayTasks)
+			taskHeaders.append("Today")
+		}
+		
+		if !weekTasks.isEmpty {
+			tasks.append(weekTasks)
+			taskHeaders.append("This Week")
+		}
+		
+		if !upcomingTasks.isEmpty {
+			tasks.append(upcomingTasks)
+			taskHeaders.append("Upcoming")
+		}
 		
 	}
 	
@@ -179,15 +196,8 @@ extension ViewControllerDashboard: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		
-		guard tasks[section].count != 0 else { return nil }
-		
-		switch section {
-		case 1: return "Today"
-		case 2: return "This Week"
-		case 3: return "Upcoming"
-		default: return "No Due Date"
-		}
+		guard taskHeaders.count > section else { return nil }
+		return taskHeaders[section]
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
