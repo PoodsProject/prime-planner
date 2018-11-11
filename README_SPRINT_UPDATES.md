@@ -35,4 +35,4 @@
 * Tests 
   * [Use Cases]
   * [Test cases](https://github.com/PoodsProject/prime-planner/tree/master/Prime%20PlannerTests)
-* [Demo]
+* [Demo](https://github.com/PoodsProject/prime-planner/blob/master/Demonstration_2.mp4)
