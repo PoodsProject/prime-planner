@@ -32,7 +32,7 @@
   * [Architecture]
   * [Class]
 * [Requirements](https://docs.google.com/document/d/1c2AgvjSABRA5wteklnDUscMIhobxsfwpT0a17MMBafU/edit)
-* Tests
+* [Tests] 
   * [Use Cases]
-  * [Test cases]
+  * [Test cases] (https://github.com/PoodsProject/prime-planner/tree/master/Prime%20PlannerTests)
 * [Demo]
