@@ -29,7 +29,7 @@
 * [Backlog](https://docs.google.com/spreadsheets/d/1VA_NIfjlXeLH4OkxnsuecHzvKW_QF0dxLrnsrLLLM74/edit#gid=0)
 * [Burndown Chart](https://docs.google.com/spreadsheets/d/1VA_NIfjlXeLH4OkxnsuecHzvKW_QF0dxLrnsrLLLM74/edit#gid=0)
 * UML Diagrams
-  * [Architecture]
+  * [Architecture](https://github.com/PoodsProject/prime-planner/blob/master/Sprint%202%20Architecture%20Design.xml)
   * [Class]
 * [Requirements](https://docs.google.com/document/d/1c2AgvjSABRA5wteklnDUscMIhobxsfwpT0a17MMBafU/edit)
 * [Tests] 
