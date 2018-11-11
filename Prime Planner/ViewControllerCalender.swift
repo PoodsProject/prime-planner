@@ -16,10 +16,7 @@ class ViewControllerCalender: UIViewController, JCalendarDelegate, JCalendarData
 	var taskListTopConstraint: NSLayoutConstraint!
 	var date = Date()
 	var shouldFocusToday = true
-	
-	var tasks = [Task]()
-	var dates = [Date: [Date]]()
-	
+		
 	var statusBarHidden = false {
 		didSet {
 			guard oldValue != statusBarHidden else { return }
@@ -35,11 +32,6 @@ class ViewControllerCalender: UIViewController, JCalendarDelegate, JCalendarData
 		return .slide
 	}
 	
-	func loadData() {
-		dates.removeAll()
-		tasks = jcore.tasks.fetch()
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(true, animated: false)
@@ -48,15 +40,16 @@ class ViewControllerCalender: UIViewController, JCalendarDelegate, JCalendarData
 		view.backgroundColor = UIColor.white
 		
 		
-		loadData()
 		layoutCalendar()
 		layoutTasksView()
 		
 		
 		
 	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		calendar.collectionView.reloadData()
 		tasksView.finishFilterTaskOperation()
 	}
 	

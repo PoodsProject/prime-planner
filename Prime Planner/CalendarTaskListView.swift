@@ -61,9 +61,6 @@ class CalendarTaskListView: UIView, UITableViewDelegate, UITableViewDataSource {
 		let task = tasks[indexPath.row]
 		jcore.remove(task)
 		
-		// reload parent data
-		parent.loadData()
-		
 		// delete the rows from the table
 		finishFilterTaskOperation(false)
 		tableView.deleteRows(at: [indexPath], with: .fade)
