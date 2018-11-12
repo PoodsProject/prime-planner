@@ -36,3 +36,4 @@
   * [Use Cases](https://docs.google.com/document/d/1TL1bNHVo5r9oRVgPzse9qoLFBiIqeA2EA4f0-ArcGvY/edit)
   * [Test cases](https://github.com/PoodsProject/prime-planner/tree/master/Prime%20PlannerTests)
 * [Demo](https://github.com/PoodsProject/prime-planner/blob/master/Demonstration_2.mp4)
+* [Demo YouTube link](https://www.youtube.com/watch?v=N3FuuWRWOPE&feature=youtu.be)
